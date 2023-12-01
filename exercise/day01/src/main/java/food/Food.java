@@ -9,7 +9,7 @@ public record Food(LocalDate expirationDate,
                    UUID inspectorId) {
 
     public boolean isEdible(Supplier<LocalDate> now) {
-        if (!this.approvedForConsumption) return false;
+        if (!approvedForConsumption) return false;
         if (inspectorId == null) return false;
 
         return isFresh(now);
