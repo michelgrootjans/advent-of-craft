@@ -7,13 +7,15 @@ import java.util.function.Supplier;
 public record Food(LocalDate expirationDate,
                    Boolean approvedForConsumption,
                    UUID inspectorId) {
+
     public boolean isEdible(Supplier<LocalDate> now) {
-        if (this.expirationDate.isAfter(now.get()) &&
-                this.approvedForConsumption &&
-                this.inspectorId != null) {
-            return true;
-        } else {
-            return false;
-        }
+        if (!this.approvedForConsumption) return false;
+        if (inspectorId == null) return false;
+
+        return isFresh(now);
+    }
+
+    private boolean isFresh(Supplier<LocalDate> now) {
+        return now.get().isBefore(expirationDate);
     }
 }
