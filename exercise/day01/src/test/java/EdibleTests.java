@@ -14,30 +14,30 @@ class EdibleTests {
     @Test
     void edible_before_expiration_date() {
         var food = new Food(expirationDate, true, inspector);
-        assertThat(food.isEdible(() -> expirationDate.minusDays(1))).isTrue();
+        assertThat(food.isEdible(expirationDate.minusDays(1))).isTrue();
     }
 
     @Test
     void inedible_on_expiration_date() {
         var food = new Food(expirationDate, true, inspector);
-        assertThat(food.isEdible(() -> expirationDate)).isFalse();
+        assertThat(food.isEdible(expirationDate)).isFalse();
     }
 
     @Test
     void inedible_after_expiration_date() {
         var food = new Food(expirationDate, true, inspector);
-        assertThat(food.isEdible(() -> expirationDate.plusDays(1))).isFalse();
+        assertThat(food.isEdible(expirationDate.plusDays(1))).isFalse();
     }
 
     @Test
     void inedible_when_not_approved_for_consumption() {
         var food = new Food(expirationDate, false, inspector);
-        assertThat(food.isEdible(() -> expirationDate.minusDays(1))).isFalse();
+        assertThat(food.isEdible(expirationDate.minusDays(1))).isFalse();
     }
 
     @Test
     void inedible_without_inspector() {
         var food = new Food(expirationDate, true, null);
-        assertThat(food.isEdible(() -> expirationDate.minusDays(1))).isFalse();
+        assertThat(food.isEdible(expirationDate.minusDays(1))).isFalse();
     }
 }
