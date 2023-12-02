@@ -4,7 +4,7 @@ public class FizzBuzz {
     private FizzBuzz() {
     }
     
-    public static String convert(Integer input) throws OutOfRangeException {
+    public static String convert(Integer input) {
         if (input > 0) {
             if (input <= 100) {
                 if (input % 3 == 0 && input % 5 == 0) {
