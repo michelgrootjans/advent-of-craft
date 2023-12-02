@@ -8,10 +8,14 @@ public class FizzBuzz {
         if (input <= 0) throw new OutOfRangeException();
         if (input > 100) throw new OutOfRangeException();
 
-        if (isFizz(input) && isBuzz(input)) return "FizzBuzz";
+        if (isFizzBuzz(input)) return "FizzBuzz";
         if (isFizz(input)) return "Fizz";
         if (isBuzz(input)) return "Buzz";
         else return input.toString();
+    }
+
+    private static boolean isFizzBuzz(Integer input) {
+        return isFizz(input) && isBuzz(input);
     }
 
     private static boolean isFizz(Integer input) {
