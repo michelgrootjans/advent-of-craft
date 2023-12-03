@@ -8,15 +8,15 @@ public class Pets {
     private final List<Pet> pets;
 
     public Pets() {
-        this(new ArrayList<>());
+        this.pets = new ArrayList<>();
     }
 
-    private Pets(List<Pet> pets) {
-        this.pets = pets;
+    private Pets(List<Pet> pets, Pet pet) {
+        this.pets = Stream.concat(pets.stream(), Stream.of(pet)).toList();
     }
 
     public Pets add(Pet pet) {
-        return new Pets(Stream.concat(pets.stream(), Stream.of(pet)).toList());
+        return new Pets(pets, pet);
     }
 
     public int youngestPetAge() {
