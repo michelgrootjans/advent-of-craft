@@ -40,7 +40,7 @@ class PopulationTests {
 
     @Test
     void whoOwnsTheYoungestPet() {
-        var people = new People();
+        var people = new People(population);
         var filtered = population.stream().min(Comparator.comparingInt(person -> person.pets().stream().mapToInt(Pet::age).min().orElse(Integer.MAX_VALUE))).orElse(null);
 
         assert filtered != null;
