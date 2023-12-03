@@ -1,3 +1,4 @@
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import people.People;
@@ -33,9 +34,6 @@ class PopulationTests {
     @Test
     void whoOwnsTheYoungestPet() {
         People people = new People(peter, stewie, joe, lois, meg, chris, cleveland, glenn);
-        var filtered = people.youngestPetOwner();
-
-        assert filtered != null;
-        assertThat(filtered).isEqualTo(lois);
+        Assertions.assertThat(people.youngestPetOwner()).hasValue(lois);
     }
 }
