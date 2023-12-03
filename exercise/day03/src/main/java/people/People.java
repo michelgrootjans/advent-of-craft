@@ -11,7 +11,7 @@ public class People {
     }
 
     public Person youngestPetOwner() {
-        return population.stream().min(Comparator.comparingInt(person -> person.pets().stream().mapToInt(Pet::age).min().orElse(Integer.MAX_VALUE)))
+        return population.stream().min(Comparator.comparingInt(Person::youngestPetAge))
             .orElse(null);
     }
 }
