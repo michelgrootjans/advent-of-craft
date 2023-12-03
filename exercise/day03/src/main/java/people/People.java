@@ -6,9 +6,8 @@ import java.util.List;
 public class People {
     private final List<Person> population;
 
-    public People(List<Person> population) {
-
-        this.population = population;
+    public People(Person... population) {
+        this.population = List.of(population);
     }
 
     public Person youngestPetOwner() {

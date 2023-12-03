@@ -4,18 +4,15 @@ import people.People;
 import people.Person;
 import people.PetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PopulationTests {
-    private static List<Person> population;
+    private static People people;
 
     @BeforeAll
     static void setup() {
-        population = Arrays.asList(
+        people = new People(
                 new Person("Peter", "Griffin")
                         .addPet(PetType.CAT, "Tabby", 2),
                 new Person("Stewie", "Griffin")
@@ -38,7 +35,6 @@ class PopulationTests {
 
     @Test
     void whoOwnsTheYoungestPet() {
-        var people = new People(population);
         var filtered = people.youngestPetOwner();
 
         assert filtered != null;
