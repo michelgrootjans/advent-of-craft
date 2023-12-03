@@ -1,25 +1,19 @@
 package people;
 
-import java.util.ArrayList;
+import static java.util.Comparator.comparingInt;
+
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 public class Pets {
     private final List<Pet> pets;
 
-    public Pets() {
-        this.pets = new ArrayList<>();
+    public Pets(Pet... pets) {
+        this.pets = List.of(pets);
     }
 
-    private Pets(List<Pet> pets, Pet pet) {
-        this.pets = Stream.concat(pets.stream(), Stream.of(pet)).toList();
-    }
-
-    public Pets add(Pet pet) {
-        return new Pets(pets, pet);
-    }
-
-    public int youngestPetAge() {
-        return pets.stream().mapToInt(Pet::age).min().orElse(Integer.MAX_VALUE);
+    public Optional<Pet> youngest() {
+        return pets.stream()
+            .min(comparingInt(Pet::age));
     }
 }

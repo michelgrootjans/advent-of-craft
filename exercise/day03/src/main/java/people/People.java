@@ -1,6 +1,7 @@
 package people;
 
-import java.util.Comparator;
+import static java.util.Comparator.comparingInt;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ public class People {
     }
 
     public Optional<Person> youngestPetOwner() {
-        return population.stream().min(Comparator.comparingInt(Person::youngestPetAge));
+        return population.stream()
+            .min(comparingInt(Person::ageOfYoungestPet));
     }
 }
