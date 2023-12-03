@@ -1,19 +1,15 @@
 package people;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public record Person(String firstName, String lastName, List<Pet> pets) {
+public record Person(String firstName, String lastName, Pets pets) {
     public Person(String firstName, String lastName) {
-        this(firstName, lastName, new ArrayList<>());
+        this(firstName, lastName, new Pets());
     }
 
     public Person addPet(PetType petType, String name, int age) {
-        pets.add(new Pet(petType, name, age));
-        return this;
+        return new Person(firstName, lastName, pets.add(new Pet(petType, name, age)));
     }
 
-    int youngestPetAge() {
-        return pets().stream().mapToInt(Pet::age).min().orElse(Integer.MAX_VALUE);
+    public int youngestPetAge() {
+        return pets.youngestPetAge();
     }
 }
