@@ -7,6 +7,7 @@ public record Person(String firstName, String lastName, Pets pets) {
 
     public Integer ageOfYoungestPet() {
         return pets.youngest()
-            .map(Pet::age).orElse(Integer.MAX_VALUE);
+            .map(Pet::age)
+            .orElse(Integer.MAX_VALUE); // this is debatable
     }
 }
