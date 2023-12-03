@@ -1,11 +1,10 @@
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import people.People;
 import people.Person;
 import people.PetType;
-
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class PopulationTests {
     @Test
