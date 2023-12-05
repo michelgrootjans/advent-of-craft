@@ -33,6 +33,7 @@ public class TextPopulationPrinter implements PopulationPrinter {
     }
 
     private String printPets(List<Pet> pets) {
+        if(pets.isEmpty()) return "";
         return "";
     }
 }
