@@ -1,19 +1,27 @@
 package blog;
 
+import static java.util.Collections.emptyList;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Article {
     private final String name;
     private final String content;
-    private final ArrayList<Comment> comments;
+    private final List<Comment> comments;
 
     public Article(String name, String content) {
         this.name = name;
         this.content = content;
-        this.comments = new ArrayList<>();
+        this.comments = emptyList();
+    }
+
+    private Article(String name, String content, List<Comment> comments) {
+        this.name = name;
+        this.content = content;
+        this.comments = comments;
     }
 
     public Article addComment(
@@ -26,8 +34,7 @@ public class Article {
             throw new CommentAlreadyExistException();
         }
 
-        comments.add(comment);
-        return this;
+        return new Article(name, content, append(comments, comment));
     }
 
     public List<Comment> getComments() {
@@ -60,6 +67,10 @@ public class Article {
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + comments.hashCode();
         return result;
+    }
+
+    private <T> List<T> append(List<T> list, T comment) {
+        return Stream.concat(list.stream(), Stream.of(comment)).toList();
     }
 }
 
