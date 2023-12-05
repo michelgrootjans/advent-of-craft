@@ -18,7 +18,7 @@ class ArticleTests {
     }
 
     @Test
-    void it_should_add_a_comment_with_the_given_text() {
+    void adding_a_comment() {
         var article = buildArticle();
         article.addComment("Amazing article !!!", "Pablo Escobar", today);
 
@@ -28,7 +28,7 @@ class ArticleTests {
     }
 
     @Test
-    void it_should_throw_an_exception_when_adding_existing_comment() {
+    void adding_an_identical_comment_twice() {
         var article = buildArticle();
         article.addComment("Amazing article !!!", "Pablo Escobar", today);
 
