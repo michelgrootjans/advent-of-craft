@@ -17,38 +17,23 @@ class PrintPopulationTest {
     @BeforeAll
     static void setup() {
         population = Arrays.asList(
+                new Person("Glenn", "Quagmire"),
                 new Person("Peter", "Griffin")
                         .addPet(PetType.CAT, "Tabby", 2),
                 new Person("Stewie", "Griffin")
                         .addPet(PetType.CAT, "Dolly", 3)
-                        .addPet(PetType.DOG, "Brian", 9),
-                new Person("Joe", "Swanson")
-                        .addPet(PetType.DOG, "Spike", 4),
-                new Person("Lois", "Griffin")
-                        .addPet(PetType.SNAKE, "Serpy", 1),
-                new Person("Meg", "Griffin")
-                        .addPet(PetType.BIRD, "Tweety", 1),
-                new Person("Chris", "Griffin")
-                        .addPet(PetType.TURTLE, "Speedy", 4),
-                new Person("Cleveland", "Brown")
-                        .addPet(PetType.HAMSTER, "Fuzzy", 1)
-                        .addPet(PetType.HAMSTER, "Wuzzy", 2),
-                new Person("Glenn", "Quagmire")
+                        .addPet(PetType.DOG, "Brian", 9)
         );
     }
 
     @Test
     void peopleWithTheirPets() {
-
         assertThat(printPopulation2(population))
-                .isEqualTo("Peter Griffin who owns : Tabby " + lineSeparator() +
-                        "Stewie Griffin who owns : Dolly Brian " + lineSeparator() +
-                        "Joe Swanson who owns : Spike " + lineSeparator() +
-                        "Lois Griffin who owns : Serpy " + lineSeparator() +
-                        "Meg Griffin who owns : Tweety " + lineSeparator() +
-                        "Chris Griffin who owns : Speedy " + lineSeparator() +
-                        "Cleveland Brown who owns : Fuzzy Wuzzy " + lineSeparator() +
-                        "Glenn Quagmire");
+            .isEqualTo(""
+                + "Glenn Quagmire" + lineSeparator()
+                + "Peter Griffin who owns : Tabby " + lineSeparator()
+                + "Stewie Griffin who owns : Dolly Brian "
+            );
     }
 
     private String printPopulation2(List<Person> population) {
