@@ -18,8 +18,7 @@ class ArticleTests {
     @Test
     void it_should_add_a_comment_with_the_given_text() {
         var article = buildArticle();
-
-        article.addComment("Amazing article !!!", "Pablo Escobar");
+        article.addComment("Amazing article !!!", "Pablo Escobar", LocalDate.now());
 
         assertThat(article.getComments()).containsExactly(
             new Comment("Amazing article !!!", "Pablo Escobar", LocalDate.now())
@@ -29,9 +28,9 @@ class ArticleTests {
     @Test
     void it_should_throw_an_exception_when_adding_existing_comment() {
         var article = buildArticle();
-        article.addComment("Amazing article !!!", "Pablo Escobar");
+        article.addComment("Amazing article !!!", "Pablo Escobar", LocalDate.now());
 
-        assertThatThrownBy(() -> article.addComment("Amazing article !!!", "Pablo Escobar"))
+        assertThatThrownBy(() -> article.addComment("Amazing article !!!", "Pablo Escobar", LocalDate.now()))
             .isInstanceOf(CommentAlreadyExistException.class);
     }
 
