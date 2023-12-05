@@ -30,8 +30,8 @@ class PrintPopulationTest {
         assertThat(new TextPopulationPrinter().print(population))
             .isEqualTo(""
                 + "Glenn Quagmire" + lineSeparator()
-                + "Peter Griffin who owns : Tabby " + lineSeparator()
-                + "Stewie Griffin who owns : Dolly Brian "
+                + "Peter Griffin who owns : Tabby" + lineSeparator()
+                + "Stewie Griffin who owns : Dolly Brian"
             );
     }
 }
