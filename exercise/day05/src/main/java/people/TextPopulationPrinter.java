@@ -13,10 +13,6 @@ public class TextPopulationPrinter implements PopulationPrinter {
         for (var person : population) {
             response.append(print(person) + printPets(person.pets()));
 
-            for (var pet : person.pets()) {
-                response.append(pet.name()).append(" ");
-            }
-
             if (!population.getLast().equals(person)) {
                 response.append(lineSeparator());
             }
@@ -30,10 +26,10 @@ public class TextPopulationPrinter implements PopulationPrinter {
 
     private String printPets(List<Pet> pets) {
         if(pets.isEmpty()) return "";
-        return " who owns : " + String.join("", pets.stream().map(this::print).toList());
+        return " who owns : " + String.join(" ", pets.stream().map(this::print).toList()) + " ";
     }
 
     private String print(Pet pet) {
-        return "";
+        return pet.name();
     }
 }
