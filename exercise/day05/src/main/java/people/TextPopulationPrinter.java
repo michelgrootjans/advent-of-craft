@@ -11,7 +11,7 @@ public class TextPopulationPrinter implements PopulationPrinter {
         final var response = new StringBuilder();
 
         for (var person : population) {
-            response.append(print(person));
+            response.append(print(person) + printPets(person.pets()));
 
             if (!person.pets().isEmpty()) {
                 response.append(" who owns : ");
@@ -30,5 +30,9 @@ public class TextPopulationPrinter implements PopulationPrinter {
 
     private String print(Person person) {
         return format("%s %s", person.firstName(), person.lastName());
+    }
+
+    private String printPets(List<Pet> pets) {
+        return "";
     }
 }
