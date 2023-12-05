@@ -42,9 +42,11 @@ Here are the different challenges :
 - [Day 1: Make your production code easier to understand.](exercise/day01/docs/challenge.md)
 - [Day 2: One level of indentation.](exercise/day02/docs/challenge.md)
 - [Day 3: One dot per line.](exercise/day03/docs/challenge.md)
+- [Day 4: Identify the behavior under test and rewrite the tests.](exercise/day04/docs/challenge.md)
 
 ### Solutions
 A solution proposal will be published here every day during the `Advent Of Craft` containing `the code` and a `step by step` guide.
 
 - [Day 1: Make your production code easier to understand.](solution/day01/docs/step-by-step.md)
 - [Day 2: One level of indentation.](solution/day02/docs/step-by-step.md)
+- [Day 3: One dot per line.](solution/day03/docs/step-by-step.md)
