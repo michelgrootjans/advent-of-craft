@@ -1,4 +1,4 @@
 package blog;
 
-public class CommentAlreadyExistException extends Exception {
+public class CommentAlreadyExistException extends RuntimeException {
 }

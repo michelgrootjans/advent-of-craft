@@ -18,7 +18,7 @@ public class Article {
     private void addComment(
             String text,
             String author,
-            LocalDate creationDate) throws CommentAlreadyExistException {
+            LocalDate creationDate) {
         var comment = new Comment(text, author, creationDate);
 
         if (comments.contains(comment)) {
@@ -26,7 +26,7 @@ public class Article {
         } else comments.add(comment);
     }
 
-    public void addComment(String text, String author) throws CommentAlreadyExistException {
+    public void addComment(String text, String author) {
         addComment(text, author, LocalDate.now());
     }
 
