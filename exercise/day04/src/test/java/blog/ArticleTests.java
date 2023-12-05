@@ -21,7 +21,7 @@ class ArticleTests {
     void adding_a_comment() {
         var article = buildArticle().addComment("Amazing article !!!", "Pablo Escobar", today);
 
-        assertThat(article.getComments()).containsExactly(
+        assertThat(article.comments()).containsExactly(
             new Comment("Amazing article !!!", "Pablo Escobar", today)
         );
     }
