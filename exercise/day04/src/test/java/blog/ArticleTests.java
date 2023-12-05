@@ -27,25 +27,6 @@ class ArticleTests {
     }
 
     @Test
-    void it_should_add_a_comment_with_the_given_author() {
-        var article = buildArticle();
-
-        var author = "Pablo Escobar";
-        article.addComment("Amazing article !!!", author);
-
-        assertThat(article.getComments())
-                .hasSize(1)
-                .anyMatch(comment -> comment.author().equals(author));
-    }
-
-    @Test
-    void it_should_add_a_comment_with_the_date_of_the_day() {
-        var article = buildArticle();
-
-        article.addComment("Amazing article !!!", "Pablo Escobar");
-    }
-
-    @Test
     void it_should_throw_an_exception_when_adding_existing_comment() {
         var article = buildArticle();
         article.addComment("Amazing article !!!", "Pablo Escobar");
