@@ -16,7 +16,7 @@ public class Article {
         this.comments = new ArrayList<>();
     }
 
-    public void addComment(
+    public Article addComment(
             String text,
             String author,
             LocalDate creationDate) {
@@ -27,6 +27,7 @@ public class Article {
         }
 
         comments.add(comment);
+        return this;
     }
 
     public List<Comment> getComments() {
