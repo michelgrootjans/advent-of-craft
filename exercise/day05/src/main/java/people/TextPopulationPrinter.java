@@ -30,6 +30,10 @@ public class TextPopulationPrinter implements PopulationPrinter {
 
     private String printPets(List<Pet> pets) {
         if(pets.isEmpty()) return "";
-        return " who owns : ";
+        return " who owns : " + String.join("", pets.stream().map(this::print).toList());
+    }
+
+    private String print(Pet pet) {
+        return "";
     }
 }
