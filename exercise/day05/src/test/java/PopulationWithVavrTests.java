@@ -1,15 +1,11 @@
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.vavr.collection.List;
 import io.vavr.collection.Seq;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import people.Person;
-import people.Pet;
 import people.PetType;
-
-import java.util.Arrays;
-
-import static java.lang.Integer.MAX_VALUE;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class PopulationWithVavrTests {
     private static Seq<Person> population;
@@ -37,17 +33,10 @@ class PopulationWithVavrTests {
         );
     }
 
-    private static int youngestPetAgeOfThePerson(Person p) {
-        return List.ofAll(p.pets())
-                .map(Pet::age)
-                .min()
-                .getOrElse(MAX_VALUE);
-    }
-
     @Test
     void whoOwnsTheYoungestPet() {
         assertThat(population
-                .minBy(PopulationWithVavrTests::youngestPetAgeOfThePerson)
+                .minBy(Person::youngestPetAge)
                 .get()
                 .firstName()
         ).isEqualTo("Lois");
