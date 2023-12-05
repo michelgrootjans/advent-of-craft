@@ -1,6 +1,5 @@
 package people;
 
-import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 
 import java.util.List;
@@ -10,17 +9,21 @@ public class TextPopulationPrinter implements PopulationPrinter {
     @Override
     public String print(List<Person> population) {
         return population.stream()
-            .map(p -> print(p) + printPets(p.pets()))
+            .map(this::print)
             .collect(Collectors.joining(lineSeparator()));
     }
 
     private String print(Person person) {
-        return format("%s %s", person.firstName(), person.lastName());
+        return printHeader(person) + printPets(person.pets());
+    }
+
+    private String printHeader(Person person) {
+        return "%s %s".formatted(person.firstName(), person.lastName());
     }
 
     private String printPets(List<Pet> pets) {
         if(pets.isEmpty()) return "";
-        return " who owns : " + String.join(" ", pets.stream().map(this::print).toList());
+        return " who owns : %s".formatted(pets.stream().map(this::print).collect(Collectors.joining(" ")));
     }
 
     private String print(Pet pet) {
