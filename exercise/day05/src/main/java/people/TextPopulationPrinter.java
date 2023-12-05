@@ -13,10 +13,6 @@ public class TextPopulationPrinter implements PopulationPrinter {
         for (var person : population) {
             response.append(print(person) + printPets(person.pets()));
 
-            if (!person.pets().isEmpty()) {
-                response.append(" who owns : ");
-            }
-
             for (var pet : person.pets()) {
                 response.append(pet.name()).append(" ");
             }
@@ -34,6 +30,6 @@ public class TextPopulationPrinter implements PopulationPrinter {
 
     private String printPets(List<Pet> pets) {
         if(pets.isEmpty()) return "";
-        return "";
+        return " who owns : ";
     }
 }
