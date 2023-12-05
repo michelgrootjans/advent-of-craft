@@ -5,15 +5,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 class ArticleTests {
     @Test
-    void it_should_add_valid_comment() {
-        var article = new Article(
-                "Lorem Ipsum",
-                "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-        );
+    void article_equality() {
+        var article = new Article("a name", "some content");
 
-        article.addComment("Amazing article !!!", "Pablo Escobar");
+        assertThat(article).isEqualTo(new Article("a name", "some content"));
     }
 
     @Test
