@@ -1,15 +1,16 @@
+import static java.lang.String.format;
+import static java.lang.System.lineSeparator;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import people.Person;
 import people.PetType;
+import people.PopulationPrinter;
+import people.TextPopulationPrinter;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static java.lang.String.format;
-import static java.lang.System.lineSeparator;
-import static java.util.Comparator.comparingInt;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class PrintPopulationTest {
     private static List<Person> population;
@@ -28,6 +29,7 @@ class PrintPopulationTest {
 
     @Test
     void peopleWithTheirPets() {
+        PopulationPrinter printer = new TextPopulationPrinter();
         assertThat(printPopulation2(population))
             .isEqualTo(""
                 + "Glenn Quagmire" + lineSeparator()
