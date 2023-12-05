@@ -15,6 +15,10 @@ public record Person(String firstName, String lastName, List<Pet> pets) {
         return this;
     }
 
+    String fullName() {
+        return "%s %s".formatted(firstName(), lastName());
+    }
+
     public int youngestPetAge() {
         return pets().stream()
             .mapToInt(Pet::age)

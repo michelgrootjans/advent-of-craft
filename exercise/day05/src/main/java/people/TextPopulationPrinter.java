@@ -14,19 +14,17 @@ public class TextPopulationPrinter implements PopulationPrinter {
     }
 
     private String print(Person person) {
-        return printHeader(person) + printPets(person.pets());
+        return person.fullName() + printPets(person);
     }
 
-    private String printHeader(Person person) {
-        return "%s %s".formatted(person.firstName(), person.lastName());
+    private String printPets(Person person) {
+        if(person.pets().isEmpty()) return "";
+        return " who owns : %s".formatted(petNames(person));
     }
 
-    private String printPets(List<Pet> pets) {
-        if(pets.isEmpty()) return "";
-        return " who owns : %s".formatted(pets.stream().map(this::print).collect(Collectors.joining(" ")));
-    }
-
-    private String print(Pet pet) {
-        return pet.name();
+    private String petNames(Person person) {
+        return person.pets().stream()
+            .map(Pet::name)
+            .collect(Collectors.joining(" "));
     }
 }
