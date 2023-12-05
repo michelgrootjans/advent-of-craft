@@ -4,20 +4,14 @@ import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TextPopulationPrinter implements PopulationPrinter {
     @Override
     public String print(List<Person> population) {
-        final var response = new StringBuilder();
-
-        for (var person : population) {
-            response.append(print(person) + printPets(person.pets()));
-
-            if (!population.getLast().equals(person)) {
-                response.append(lineSeparator());
-            }
-        }
-        return response.toString();
+        return population.stream()
+            .map(p -> print(p) + printPets(p.pets()))
+            .collect(Collectors.joining(lineSeparator()));
     }
 
     private String print(Person person) {
