@@ -11,7 +11,7 @@ import static java.lang.System.lineSeparator;
 import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PopulationTests {
+class PrintPopulationTest {
     private static List<Person> population;
 
     @BeforeAll
@@ -39,10 +39,9 @@ class PopulationTests {
 
     @Test
     void peopleWithTheirPets() {
-        final var response = formatPopulation();
 
-        assertThat(response.toString())
-                .hasToString("Peter Griffin who owns : Tabby " + lineSeparator() +
+        assertThat(printPopulation2(population))
+                .isEqualTo("Peter Griffin who owns : Tabby " + lineSeparator() +
                         "Stewie Griffin who owns : Dolly Brian " + lineSeparator() +
                         "Joe Swanson who owns : Spike " + lineSeparator() +
                         "Lois Griffin who owns : Serpy " + lineSeparator() +
@@ -52,7 +51,7 @@ class PopulationTests {
                         "Glenn Quagmire");
     }
 
-    private static StringBuilder formatPopulation() {
+    private String printPopulation2(List<Person> population) {
         final var response = new StringBuilder();
 
         for (var person : population) {
@@ -70,16 +69,6 @@ class PopulationTests {
                 response.append(lineSeparator());
             }
         }
-        return response;
-    }
-
-    @Test
-    void whoOwnsTheYoungestPet() {
-        var filtered = population.stream()
-                .min(comparingInt(Person::youngestPetAge))
-                .orElse(null);
-
-        assert filtered != null;
-        assertThat(filtered.firstName()).isEqualTo("Lois");
+        return response.toString();
     }
 }

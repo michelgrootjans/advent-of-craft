@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import people.Person;
 import people.PetType;
 
-class PopulationWithVavrTests {
+class PopulationTest {
     private static Seq<Person> population;
 
     @BeforeAll
