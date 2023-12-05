@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 class ArticleTests {
     @Test
     void article_equality() {
@@ -17,12 +19,11 @@ class ArticleTests {
     void it_should_add_a_comment_with_the_given_text() {
         var article = buildArticle();
 
-        var text = "Amazing article !!!";
-        article.addComment(text, "Pablo Escobar");
+        article.addComment("Amazing article !!!", "Pablo Escobar");
 
-        assertThat(article.getComments())
-                .hasSize(1)
-                .anyMatch(comment -> comment.text().equals(text));
+        assertThat(article.getComments()).containsExactly(
+            new Comment("Amazing article !!!", "Pablo Escobar", LocalDate.now())
+        );
     }
 
     @Test
