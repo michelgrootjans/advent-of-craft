@@ -1,6 +1,7 @@
 package games;
 
-import org.approvaltests.combinations.CombinationApprovals;
+import static org.approvaltests.combinations.CombinationApprovals.verifyAllCombinations;
+
 import org.approvaltests.reporters.ClipboardReporter;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 public class FizzBuzzApprovalTests {
     @Test
     void approvalTests() {
-        CombinationApprovals.verifyAllCombinations(FizzBuzz::convert, range(-2, 102));
+        verifyAllCombinations(FizzBuzz::convert, range(-2, 102));
     }
 
     private Integer[] range(int from, int to) {
