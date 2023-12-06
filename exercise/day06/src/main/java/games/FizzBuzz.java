@@ -10,7 +10,7 @@ public class FizzBuzz {
     private FizzBuzz() {
     }
 
-    public static String convert(Integer input) throws OutOfRangeException {
+    public static String convert(Integer input) {
         if (isOutOfRange(input)) {
             throw new OutOfRangeException();
         }
