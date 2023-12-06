@@ -1,6 +1,5 @@
 package games;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.stream.Stream;
 
 class FizzBuzzTests {
-    private static Stream<Arguments> fizzbuzz() {
+    private static Stream<Arguments> valid_cases() {
         return Stream.of(
             Arguments.of(1, "1"),
             Arguments.of(2, "2"),
@@ -47,16 +46,7 @@ class FizzBuzzTests {
         );
     }
 
-    @ParameterizedTest(name="{0} => {1}")
-    @MethodSource
-    void fizzbuzz(Integer input, String expectedOutput) throws OutOfRangeException {
-        assertThat(FizzBuzz.convert(input))
-            .isEqualTo(expectedOutput);
-    }
-
-
-
-    private static Stream<Arguments> out_of_range() {
+    private static Stream<Arguments> out_of_range_cases() {
         return Stream.of(
             Arguments.of(-1),
             Arguments.of(0),
@@ -65,9 +55,16 @@ class FizzBuzzTests {
         );
     }
 
+    @ParameterizedTest(name="{0} => {1}")
+    @MethodSource
+    void valid_cases(Integer input, String expectedOutput) throws OutOfRangeException {
+        assertThat(FizzBuzz.convert(input))
+            .isEqualTo(expectedOutput);
+    }
+
     @ParameterizedTest(name="{0} is out of range")
     @MethodSource
-    void out_of_range(Integer input) {
+    void out_of_range_cases(Integer input) {
         assertThatThrownBy(() -> FizzBuzz.convert(input))
             .isInstanceOf(OutOfRangeException.class);
     }
