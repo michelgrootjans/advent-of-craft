@@ -44,6 +44,7 @@ Here are the different challenges :
 - [Day 3: One dot per line.](exercise/day03/docs/challenge.md)
 - [Day 4: Identify the behavior under test and rewrite the tests.](exercise/day04/docs/challenge.md)
 - [Day 5: No "for" loop authorized.](exercise/day05/docs/challenge.md)
+- [Day 6: Parameterize your tests.](exercise/day06/docs/challenge.md)
 
 ### Solutions
 A solution proposal will be published here every day during the `Advent Of Craft` containing `the code` and a `step by step` guide.
@@ -52,3 +53,4 @@ A solution proposal will be published here every day during the `Advent Of Craft
 - [Day 2: One level of indentation.](solution/day02/docs/step-by-step.md)
 - [Day 3: One dot per line.](solution/day03/docs/step-by-step.md)
 - [Day 4: Identify the behavior under test and rewrite the tests.](solution/day04/docs/step-by-step.md)
+- [Day 5: No "for" loop authorized.](solution/day05/docs/step-by-step.md)
