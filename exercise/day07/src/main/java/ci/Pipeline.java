@@ -18,79 +18,36 @@ public class Pipeline {
 
     public void run(Project project) {
         if (project.hasTests()) {
-
             if (project.runTests().equals("success")) {
                 log.info("Tests passed");
-                boolean deploySuccessful1 = false;
-                if ("success".equals(project.deploy())) {
-                    log.info("Deployment successful");
-                    deploySuccessful1 = true;
-                    if (config.sendEmailSummary()) {
-                        log.info("Sending email");
-                        if (deploySuccessful1) {
-                            emailer.send("Deployment completed successfully");
-                        } else {
-                            emailer.send("Deployment failed");
-                        }
-                    } else {
-                        log.info("Email disabled");
-                    }
-                } else {
-                    log.error("Deployment failed");
-                    if (config.sendEmailSummary()) {
-                        log.info("Sending email");
-                        if (deploySuccessful1) {
-                            emailer.send("Deployment completed successfully");
-                        } else {
-                            emailer.send("Deployment failed");
-                        }
-                    } else {
-                        log.info("Email disabled");
-                    }
-                }
+                deploy(project);
             } else {
                 log.error("Tests failed");
 
-                if (config.sendEmailSummary()) {
-                    log.info("Sending email");
-                    emailer.send("Tests failed");
-                } else {
-                    log.info("Email disabled");
-                }
+                sendMail("Tests failed");
             }
         } else {
-            boolean deploySuccessful;
-
             log.info("No tests");
+            deploy(project);
+        }
+    }
 
-            if ("success".equals(project.deploy())) {
-                log.info("Deployment successful");
-                deploySuccessful = true;
-                if (config.sendEmailSummary()) {
-                    log.info("Sending email");
-                    if (deploySuccessful) {
-                        emailer.send("Deployment completed successfully");
-                    } else {
-                        emailer.send("Deployment failed");
-                    }
-                } else {
-                    log.info("Email disabled");
-                }
-            } else {
-                log.error("Deployment failed");
-                deploySuccessful = false;
-                if (config.sendEmailSummary()) {
-                    log.info("Sending email");
-                    if (deploySuccessful) {
-                        emailer.send("Deployment completed successfully");
-                    } else {
-                        emailer.send("Deployment failed");
-                    }
-                } else {
-                    log.info("Email disabled");
-                }
-            }
+    private void deploy(Project project) {
+        if (project.deploy().equals("success")) {
+            log.info("Deployment successful");
+            sendMail("Deployment completed successfully");
+        } else {
+            log.error("Deployment failed");
+            sendMail("Deployment failed");
+        }
+    }
 
+    private void sendMail(String Deployment_completed_successfully) {
+        if (config.sendEmailSummary()) {
+            log.info("Sending email");
+            emailer.send(Deployment_completed_successfully);
+        } else {
+            log.info("Email disabled");
         }
     }
 }
