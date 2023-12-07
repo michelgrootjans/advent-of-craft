@@ -17,47 +17,92 @@ public class Pipeline {
     }
 
     public void run(Project project) {
-        boolean testsPassed;
-        boolean deploySuccessful;
-
         if (project.hasTests()) {
-            if ("success".equals(project.runTests())) {
-                log.info("Tests passed");
-                testsPassed = true;
-            } else {
-                log.error("Tests failed");
-                testsPassed = false;
-            }
-        } else {
-            log.info("No tests");
-            testsPassed = true;
-        }
+            boolean testsPassed;
+            boolean deploySuccessful;
 
-        if (testsPassed) {
-            if ("success".equals(project.deploy())) {
-                log.info("Deployment successful");
-                deploySuccessful = true;
-            } else {
-                log.error("Deployment failed");
-                deploySuccessful = false;
-            }
-        } else {
-            deploySuccessful = false;
-        }
-
-        if (config.sendEmailSummary()) {
-            log.info("Sending email");
-            if (testsPassed) {
-                if (deploySuccessful) {
-                    emailer.send("Deployment completed successfully");
+            if (project.hasTests()) {
+                if ("success".equals(project.runTests())) {
+                    log.info("Tests passed");
+                    testsPassed = true;
                 } else {
-                    emailer.send("Deployment failed");
+                    log.error("Tests failed");
+                    testsPassed = false;
                 }
             } else {
-                emailer.send("Tests failed");
+                log.info("No tests");
+                testsPassed = true;
+            }
+
+            if (testsPassed) {
+                if ("success".equals(project.deploy())) {
+                    log.info("Deployment successful");
+                    deploySuccessful = true;
+                } else {
+                    log.error("Deployment failed");
+                    deploySuccessful = false;
+                }
+            } else {
+                deploySuccessful = false;
+            }
+
+            if (config.sendEmailSummary()) {
+                log.info("Sending email");
+                if (testsPassed) {
+                    if (deploySuccessful) {
+                        emailer.send("Deployment completed successfully");
+                    } else {
+                        emailer.send("Deployment failed");
+                    }
+                } else {
+                    emailer.send("Tests failed");
+                }
+            } else {
+                log.info("Email disabled");
             }
         } else {
-            log.info("Email disabled");
+            boolean testsPassed;
+            boolean deploySuccessful;
+
+            if (project.hasTests()) {
+                if ("success".equals(project.runTests())) {
+                    log.info("Tests passed");
+                    testsPassed = true;
+                } else {
+                    log.error("Tests failed");
+                    testsPassed = false;
+                }
+            } else {
+                log.info("No tests");
+                testsPassed = true;
+            }
+
+            if (testsPassed) {
+                if ("success".equals(project.deploy())) {
+                    log.info("Deployment successful");
+                    deploySuccessful = true;
+                } else {
+                    log.error("Deployment failed");
+                    deploySuccessful = false;
+                }
+            } else {
+                deploySuccessful = false;
+            }
+
+            if (config.sendEmailSummary()) {
+                log.info("Sending email");
+                if (testsPassed) {
+                    if (deploySuccessful) {
+                        emailer.send("Deployment completed successfully");
+                    } else {
+                        emailer.send("Deployment failed");
+                    }
+                } else {
+                    emailer.send("Tests failed");
+                }
+            } else {
+                log.info("Email disabled");
+            }
         }
     }
 }
