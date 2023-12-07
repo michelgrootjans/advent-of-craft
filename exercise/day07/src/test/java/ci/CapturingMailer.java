@@ -5,7 +5,7 @@ import ci.dependencies.Emailer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestEmailer implements Emailer {
+public class CapturingMailer implements Emailer {
     private final List<String> messages = new ArrayList<>();
 
     @Override
