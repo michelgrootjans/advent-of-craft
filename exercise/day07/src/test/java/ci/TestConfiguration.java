@@ -10,11 +10,7 @@ public class TestConfiguration implements Config {
         return sendEmailSummary;
     }
 
-    void sendEmails() {
-        sendEmailSummary = true;
-    }
-
-    void dontSentEmails() {
-        sendEmailSummary = false;
+    public void enableEmails(boolean sendEmails) {
+        sendEmailSummary = sendEmails;
     }
 }
