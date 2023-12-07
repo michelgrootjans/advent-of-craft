@@ -2,15 +2,14 @@ package ci;
 
 import ci.dependencies.Config;
 
-public class TestConfiguration implements Config {
-    private final boolean sendEmailSummary;
-
-    public TestConfiguration(Boolean sendMail) {
-        sendEmailSummary = true;
+public record TestConfiguration(Boolean sendEmail) implements Config {
+    @Override
+    public boolean sendEmailSummary() {
+        return sendEmail;
     }
 
     @Override
-    public boolean sendEmailSummary() {
-        return sendEmailSummary;
+    public String toString() {
+        return "sendEmail: " + sendEmail;
     }
 }

@@ -1,5 +1,6 @@
 package ci;
 
+import ci.dependencies.Config;
 import ci.dependencies.Project;
 import ci.dependencies.TestStatus;
 import org.approvaltests.combinations.CombinationApprovals;
@@ -14,7 +15,7 @@ import java.util.List;
 class PipelineTest {
     @Test
     void run_approval_tests() {
-        Boolean[] sendMail = {true, false};
+        Config[] sendMail = {new TestConfiguration(true), new TestConfiguration(false)};
         TestStatus[] testStatuses = {TestStatus.PASSING_TESTS, TestStatus.FAILING_TESTS, TestStatus.NO_TESTS};
         Boolean[] deploySuccedful = {true, false};
 
@@ -26,20 +27,19 @@ class PipelineTest {
         );
     }
 
-    private RunResult run(Boolean sendMail, TestStatus testStatus, boolean deploySuccesful) {
+    private RunResult run(Config config, TestStatus testStatus, boolean deploySuccesful) {
         CapturingLogger logger = new CapturingLogger();
         CapturingMailer mailer = new CapturingMailer();
-        Pipeline pipeline = new Pipeline(new TestConfiguration(sendMail), mailer, logger);
+        Pipeline pipeline = new Pipeline(config, mailer, logger);
         pipeline.run(
             Project.builder()
-            .setTestStatus(testStatus)
-            .setDeploysSuccessfully(deploySuccesful)
-            .build()
+                .setTestStatus(testStatus)
+                .setDeploysSuccessfully(deploySuccesful)
+                .build()
         );
         return new RunResult(logger.getLoggedLines(), mailer.sentMails());
     }
 
     private record RunResult(List<String> loggedLines, List<String> sentMails) {
     }
-
 }
