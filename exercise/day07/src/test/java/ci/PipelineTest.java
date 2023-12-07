@@ -1,22 +1,18 @@
 package ci;
 
-import ci.dependencies.Config;
-import ci.dependencies.Emailer;
+import static ci.dependencies.TestStatus.FAILING_TESTS;
+import static ci.dependencies.TestStatus.NO_TESTS;
+import static ci.dependencies.TestStatus.PASSING_TESTS;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import ci.dependencies.Project;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static ci.dependencies.TestStatus.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
 class PipelineTest {
     private final TestConfiguration config = new TestConfiguration();
     private final CapturingLogger log = new CapturingLogger();
-    private final Emailer emailer = mock(Emailer.class);
+    private final TestEmailer emailer = new TestEmailer();
 
     private Pipeline pipeline;
 
@@ -42,7 +38,7 @@ class PipelineTest {
             "INFO: Sending email"
         );
 
-        verify(emailer).send("Deployment completed successfully");
+        assertThat(emailer.sentMails()).containsExactly("Deployment completed successfully");
     }
 
     @Test
@@ -62,7 +58,7 @@ class PipelineTest {
             "INFO: Email disabled"
         );
 
-        verify(emailer, never()).send(any());
+        assertThat(emailer.sentMails()).isEmpty();
     }
 
     @Test
@@ -82,7 +78,7 @@ class PipelineTest {
             "INFO: Sending email"
         );
 
-        verify(emailer).send("Deployment completed successfully");
+        assertThat(emailer.sentMails()).containsExactly("Deployment completed successfully");
     }
 
     @Test
@@ -102,7 +98,7 @@ class PipelineTest {
             "INFO: Email disabled"
         );
 
-        verify(emailer, never()).send(any());
+        assertThat(emailer.sentMails()).isEmpty();
     }
 
     @Test
@@ -120,7 +116,7 @@ class PipelineTest {
             "INFO: Sending email"
         );
 
-        verify(emailer).send("Tests failed");
+        assertThat(emailer.sentMails()).containsExactly("Tests failed");
     }
 
     @Test
@@ -138,7 +134,7 @@ class PipelineTest {
             "INFO: Email disabled"
         );
 
-        verify(emailer, never()).send(any());
+        assertThat(emailer.sentMails()).isEmpty();
     }
 
     @Test
@@ -158,7 +154,7 @@ class PipelineTest {
             "INFO: Sending email"
         );
 
-        verify(emailer).send("Deployment failed");
+        assertThat(emailer.sentMails()).containsExactly("Deployment failed");
     }
 
     @Test
@@ -178,7 +174,7 @@ class PipelineTest {
             "INFO: Email disabled"
         );
 
-        verify(emailer, never()).send(any());
+        assertThat(emailer.sentMails()).isEmpty();
     }
 
     @Test
@@ -198,7 +194,7 @@ class PipelineTest {
             "INFO: Sending email"
         );
 
-        verify(emailer).send("Deployment failed");
+        assertThat(emailer.sentMails()).containsExactly("Deployment failed");
     }
 
     @Test
@@ -218,6 +214,6 @@ class PipelineTest {
             "INFO: Email disabled"
         );
 
-        verify(emailer, never()).send(any());
+        assertThat(emailer.sentMails()).isEmpty();
     }
 }
