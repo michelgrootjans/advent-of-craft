@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class PipelineTest {
-    private final Config config = mock(Config.class);
+    private final TestConfiguration config = new TestConfiguration();
     private final CapturingLogger log = new CapturingLogger();
     private final Emailer emailer = mock(Emailer.class);
 
@@ -27,7 +27,7 @@ class PipelineTest {
 
     @Test
     void project_with_tests_that_deploys_successfully_with_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(true);
+        config.sendEmails();
 
         var project = Project.builder()
                 .setTestStatus(PASSING_TESTS)
@@ -47,7 +47,7 @@ class PipelineTest {
 
     @Test
     void project_with_tests_that_deploys_successfully_without_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(false);
+        config.dontSentEmails();
 
         Project project = Project.builder()
                 .setTestStatus(PASSING_TESTS)
@@ -67,7 +67,7 @@ class PipelineTest {
 
     @Test
     void project_without_tests_that_deploys_successfully_with_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(true);
+        config.sendEmails();
 
         Project project = Project.builder()
                 .setTestStatus(NO_TESTS)
@@ -87,7 +87,7 @@ class PipelineTest {
 
     @Test
     void project_without_tests_that_deploys_successfully_without_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(false);
+        config.dontSentEmails();
 
         Project project = Project.builder()
                 .setTestStatus(NO_TESTS)
@@ -107,7 +107,7 @@ class PipelineTest {
 
     @Test
     void project_with_tests_that_fail_with_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(true);
+        config.sendEmails();
 
         Project project = Project.builder()
                 .setTestStatus(FAILING_TESTS)
@@ -125,7 +125,7 @@ class PipelineTest {
 
     @Test
     void project_with_tests_that_fail_without_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(false);
+        config.dontSentEmails();
 
         Project project = Project.builder()
                 .setTestStatus(FAILING_TESTS)
@@ -143,7 +143,7 @@ class PipelineTest {
 
     @Test
     void project_with_tests_and_failing_build_with_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(true);
+        config.sendEmails();
 
         Project project = Project.builder()
                 .setTestStatus(PASSING_TESTS)
@@ -163,7 +163,7 @@ class PipelineTest {
 
     @Test
     void project_with_tests_and_failing_build_without_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(false);
+        config.dontSentEmails();
 
         Project project = Project.builder()
                 .setTestStatus(PASSING_TESTS)
@@ -183,7 +183,7 @@ class PipelineTest {
 
     @Test
     void project_without_tests_and_failing_build_with_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(true);
+        config.sendEmails();
 
         Project project = Project.builder()
                 .setTestStatus(NO_TESTS)
@@ -203,7 +203,7 @@ class PipelineTest {
 
     @Test
     void project_without_tests_and_failing_build_without_email_notification() {
-        when(config.sendEmailSummary()).thenReturn(false);
+        config.dontSentEmails();
 
         Project project = Project.builder()
                 .setTestStatus(NO_TESTS)
