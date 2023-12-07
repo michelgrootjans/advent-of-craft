@@ -29,7 +29,7 @@ class PipelineTest {
 
     private RunResult run(Config config, TestStatus testStatus, boolean deploySuccesful) {
         CapturingLogger logger = new CapturingLogger();
-        CapturingMailer mailer = new CapturingMailer();
+        CapturingMailer mailer = new CapturingMailer(config, logger);
         Pipeline pipeline = new Pipeline(config, mailer, logger);
         pipeline.run(
             Project.builder()

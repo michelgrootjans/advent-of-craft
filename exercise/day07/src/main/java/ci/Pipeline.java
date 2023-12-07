@@ -17,14 +17,14 @@ public class Pipeline {
     }
 
     public void run(Project project) {
+        var tester = new Tester(logger);
         if (project.hasTests()) {
             if (project.runTests().equals("success")) {
                 logger.info("Tests passed");
                 deploy(project);
             } else {
                 logger.error("Tests failed");
-
-                sendMail("Tests failed");
+                emailer.send("Tests failed");
             }
         } else {
             logger.info("No tests");
@@ -35,19 +35,10 @@ public class Pipeline {
     private void deploy(Project project) {
         if (project.deploy().equals("success")) {
             logger.info("Deployment successful");
-            sendMail("Deployment completed successfully");
+            emailer.send("Deployment completed successfully");
         } else {
             logger.error("Deployment failed");
-            sendMail("Deployment failed");
-        }
-    }
-
-    private void sendMail(String Deployment_completed_successfully) {
-        if (config.sendEmailSummary()) {
-            logger.info("Sending email");
-            emailer.send(Deployment_completed_successfully);
-        } else {
-            logger.info("Email disabled");
+            emailer.send("Deployment failed");
         }
     }
 }
