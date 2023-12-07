@@ -1,23 +1,19 @@
 package ci;
 
-import ci.dependencies.Config;
 import ci.dependencies.Emailer;
 import ci.dependencies.Logger;
 import ci.dependencies.Project;
 
 public class Pipeline {
-    private final Config config;
     private final Emailer emailer;
     private final Logger logger;
 
-    public Pipeline(Config config, Emailer emailer, Logger logger) {
-        this.config = config;
+    public Pipeline(Emailer emailer, Logger logger) {
         this.emailer = emailer;
         this.logger = logger;
     }
 
     public void run(Project project) {
-        var tester = new Tester(logger);
         if (project.hasTests()) {
             if (project.runTests().equals("success")) {
                 logger.info("Tests passed");
