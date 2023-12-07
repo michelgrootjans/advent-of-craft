@@ -25,19 +25,28 @@ public class Pipeline {
                 if ("success".equals(project.deploy())) {
                     log.info("Deployment successful");
                     deploySuccessful1 = true;
-                } else {
-                    log.error("Deployment failed");
-                }
-
-                if (config.sendEmailSummary()) {
-                    log.info("Sending email");
-                    if (deploySuccessful1) {
-                        emailer.send("Deployment completed successfully");
+                    if (config.sendEmailSummary()) {
+                        log.info("Sending email");
+                        if (deploySuccessful1) {
+                            emailer.send("Deployment completed successfully");
+                        } else {
+                            emailer.send("Deployment failed");
+                        }
                     } else {
-                        emailer.send("Deployment failed");
+                        log.info("Email disabled");
                     }
                 } else {
-                    log.info("Email disabled");
+                    log.error("Deployment failed");
+                    if (config.sendEmailSummary()) {
+                        log.info("Sending email");
+                        if (deploySuccessful1) {
+                            emailer.send("Deployment completed successfully");
+                        } else {
+                            emailer.send("Deployment failed");
+                        }
+                    } else {
+                        log.info("Email disabled");
+                    }
                 }
             } else {
                 log.error("Tests failed");
@@ -57,21 +66,31 @@ public class Pipeline {
             if ("success".equals(project.deploy())) {
                 log.info("Deployment successful");
                 deploySuccessful = true;
+                if (config.sendEmailSummary()) {
+                    log.info("Sending email");
+                    if (deploySuccessful) {
+                        emailer.send("Deployment completed successfully");
+                    } else {
+                        emailer.send("Deployment failed");
+                    }
+                } else {
+                    log.info("Email disabled");
+                }
             } else {
                 log.error("Deployment failed");
                 deploySuccessful = false;
+                if (config.sendEmailSummary()) {
+                    log.info("Sending email");
+                    if (deploySuccessful) {
+                        emailer.send("Deployment completed successfully");
+                    } else {
+                        emailer.send("Deployment failed");
+                    }
+                } else {
+                    log.info("Email disabled");
+                }
             }
 
-            if (config.sendEmailSummary()) {
-                log.info("Sending email");
-                if (deploySuccessful) {
-                    emailer.send("Deployment completed successfully");
-                } else {
-                    emailer.send("Deployment failed");
-                }
-            } else {
-                log.info("Email disabled");
-            }
         }
     }
 }
