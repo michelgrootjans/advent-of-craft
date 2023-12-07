@@ -18,7 +18,7 @@ public class Project {
     }
 
     public String runTests() {
-        return testStatus == TestStatus.PASSING_TESTS ? "success" : "failure";
+        return testStatus != TestStatus.FAILING_TESTS ? "success" : "failure";
     }
 
     public String deploy() {

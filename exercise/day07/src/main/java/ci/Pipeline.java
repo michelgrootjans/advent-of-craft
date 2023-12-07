@@ -14,21 +14,18 @@ public class Pipeline {
     }
 
     public void run(Project project) {
-        if (project.hasTests()) {
-            if (project.runTests().equals("success")) {
+        if (project.runTests().equals("success")) {
+            if (project.hasTests()) {
                 logger.info("Tests passed");
-                deploy(project);
             } else {
-                logger.error("Tests failed");
-                emailer.send("Tests failed");
+                logger.info("No tests");
             }
-        } else {
-            logger.info("No tests");
-            deploy(project);
+        } else{
+            logger.error("Tests failed");
+            emailer.send("Tests failed");
+            return;
         }
-    }
 
-    private void deploy(Project project) {
         if (project.deploy().equals("success")) {
             logger.info("Deployment successful");
             emailer.send("Deployment completed successfully");
