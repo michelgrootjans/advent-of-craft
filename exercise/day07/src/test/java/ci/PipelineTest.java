@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static ci.dependencies.TestStatus.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -35,11 +36,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: Tests passed",
-                "INFO: Deployment successful",
-                "INFO: Sending email"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: Tests passed",
+            "INFO: Deployment successful",
+            "INFO: Sending email"
+        );
 
         verify(emailer).send("Deployment completed successfully");
     }
@@ -55,11 +56,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: Tests passed",
-                "INFO: Deployment successful",
-                "INFO: Email disabled"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: Tests passed",
+            "INFO: Deployment successful",
+            "INFO: Email disabled"
+        );
 
         verify(emailer, never()).send(any());
     }
@@ -75,11 +76,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: No tests",
-                "INFO: Deployment successful",
-                "INFO: Sending email"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: No tests",
+            "INFO: Deployment successful",
+            "INFO: Sending email"
+        );
 
         verify(emailer).send("Deployment completed successfully");
     }
@@ -95,11 +96,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: No tests",
-                "INFO: Deployment successful",
-                "INFO: Email disabled"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: No tests",
+            "INFO: Deployment successful",
+            "INFO: Email disabled"
+        );
 
         verify(emailer, never()).send(any());
     }
@@ -114,10 +115,10 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "ERROR: Tests failed",
-                "INFO: Sending email"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "ERROR: Tests failed",
+            "INFO: Sending email"
+        );
 
         verify(emailer).send("Tests failed");
     }
@@ -132,10 +133,10 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "ERROR: Tests failed",
-                "INFO: Email disabled"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "ERROR: Tests failed",
+            "INFO: Email disabled"
+        );
 
         verify(emailer, never()).send(any());
     }
@@ -151,11 +152,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: Tests passed",
-                "ERROR: Deployment failed",
-                "INFO: Sending email"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: Tests passed",
+            "ERROR: Deployment failed",
+            "INFO: Sending email"
+        );
 
         verify(emailer).send("Deployment failed");
     }
@@ -171,11 +172,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: Tests passed",
-                "ERROR: Deployment failed",
-                "INFO: Email disabled"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: Tests passed",
+            "ERROR: Deployment failed",
+            "INFO: Email disabled"
+        );
 
         verify(emailer, never()).send(any());
     }
@@ -191,11 +192,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: No tests",
-                "ERROR: Deployment failed",
-                "INFO: Sending email"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: No tests",
+            "ERROR: Deployment failed",
+            "INFO: Sending email"
+        );
 
         verify(emailer).send("Deployment failed");
     }
@@ -211,11 +212,11 @@ class PipelineTest {
 
         pipeline.run(project);
 
-        assertEquals(Arrays.asList(
-                "INFO: No tests",
-                "ERROR: Deployment failed",
-                "INFO: Email disabled"
-        ), log.getLoggedLines());
+        assertThat(log.getLoggedLines()).containsExactly(
+            "INFO: No tests",
+            "ERROR: Deployment failed",
+            "INFO: Email disabled"
+        );
 
         verify(emailer, never()).send(any());
     }
