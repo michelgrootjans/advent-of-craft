@@ -27,12 +27,24 @@ class PasswordtValidationTest {
         assertThat(isValid("ABCDEF1*")).isFalse();
     }
 
+    @Test
+    void no_number() {
+        assertThat(isValid("ABCdefg*")).isFalse();
+    }
+
     private boolean isValid(String password) {
         if (password.length() < 8) return false;
         if(failsUppercaseRule(password)) return false;
         if(failsLowercaseRule(password)) return false;
+        if(failsNumbersRule(password)) return false;
 
         return true;
+    }
+
+    private boolean failsUppercaseRule(String password) {
+        List<String> passwordLetters = toLetters(password);
+        List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        return passwordLetters.stream().noneMatch(uppercaseAlphabet::contains);
     }
 
     private boolean failsLowercaseRule(String password) {
@@ -41,10 +53,10 @@ class PasswordtValidationTest {
         return passwordLetters.stream().noneMatch(lowercaseAlphabet::contains);
     }
 
-    private boolean failsUppercaseRule(String password) {
+    private boolean failsNumbersRule(String password) {
         List<String> passwordLetters = toLetters(password);
-        List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        return passwordLetters.stream().noneMatch(uppercaseAlphabet::contains);
+        List<String> allowedNumbers = toLetters("0123456789");
+        return passwordLetters.stream().noneMatch(allowedNumbers::contains);
     }
 
     private ArrayList<String> toLetters(String password) {
