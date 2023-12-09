@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PasswordValidator {
-    boolean validate(String password, PasswordtValidationTest passwordtValidationTest) {
+    boolean validate(String password) {
         if (password.length() < 8) return false;
         if(failsUppercaseRule(password)) return false;
         if(failsLowercaseRule(password)) return false;
