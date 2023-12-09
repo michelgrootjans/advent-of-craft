@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PasswordValidator {
@@ -7,21 +6,23 @@ public class PasswordValidator {
     private final List<PasswordRule> rules;
 
     public PasswordValidator() {
-        rules = List.of(new LengthRule());
+        rules = List.of(
+            new LengthRule(),
+            new UppercaseRule()
+        );
     }
 
     boolean validate(String password) {
-        ArrayList<String> passwordLetters = toLetters(password);
+        ArrayList<String> passwordLetters = StringSplitter.toLetters(password);
 
         return rules.stream().allMatch(rule -> rule.passes(passwordLetters))
-            && passesUppercaseRule(passwordLetters)
             && passesLowercaseRule(passwordLetters)
             && passesNumberRule(passwordLetters)
             && passesSpecialCharacterRule(passwordLetters);
     }
 
     private boolean passesSpecialCharacterRule(ArrayList<String> passwordLetters) {
-        List<String> specialCharacters = toLetters(".*#@$%&");
+        List<String> specialCharacters = StringSplitter.toLetters(".*#@$%&");
         return passwordLetters.stream().anyMatch(specialCharacters::contains);
     }
 
@@ -31,22 +32,17 @@ public class PasswordValidator {
     }
 
     private boolean passesLowercaseRule(ArrayList<String> passwordLetters) {
-        List<String> lowercaseAlphabet = toLetters("abcdefghijklmnopqrstuvwxyz");
+        List<String> lowercaseAlphabet = StringSplitter.toLetters("abcdefghijklmnopqrstuvwxyz");
         return passwordLetters.stream().anyMatch(lowercaseAlphabet::contains);
     }
 
     private boolean passesUppercaseRule(ArrayList<String> passwordLetters) {
-        List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        List<String> uppercaseAlphabet = StringSplitter.toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         return passwordLetters.stream().anyMatch(uppercaseAlphabet::contains);
     }
 
     private boolean failsNumbersRule(List<String> passwordLetters) {
-        List<String> allowedNumbers = toLetters("0123456789");
+        List<String> allowedNumbers = StringSplitter.toLetters("0123456789");
         return passwordLetters.stream().noneMatch(allowedNumbers::contains);
     }
-
-    private ArrayList<String> toLetters(String password) {
-        return new ArrayList<>(Arrays.asList(password.split("")));
-    }
-
 }
