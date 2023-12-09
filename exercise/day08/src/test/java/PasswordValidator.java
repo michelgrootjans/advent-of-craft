@@ -4,16 +4,16 @@ import java.util.List;
 
 public class PasswordValidator {
 
-    private LengthRule lengthRule;
+    private final List<PasswordRule> rules;
 
     public PasswordValidator() {
-        lengthRule = new LengthRule();
+        rules = List.of(new LengthRule());
     }
 
     boolean validate(String password) {
         ArrayList<String> passwordLetters = toLetters(password);
 
-        return lengthRule.passes(passwordLetters)
+        return rules.stream().allMatch(rule -> rule.passes(passwordLetters))
             && passesUppercaseRule(passwordLetters)
             && passesLowercaseRule(passwordLetters)
             && passesNumberRule(passwordLetters)
