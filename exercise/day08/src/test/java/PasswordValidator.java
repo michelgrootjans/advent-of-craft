@@ -6,17 +6,17 @@ public class PasswordValidator {
     boolean validate(String password) {
         ArrayList<String> passwordLetters = toLetters(password);
 
-        return passesLengthRule(passwordLetters) && !failsUppercaseRule(passwordLetters) && !failsLowercaseRule(passwordLetters) && !failsNumbersRule(
+        return passesLengthRule(passwordLetters) && passesUppercaseRule(passwordLetters) && !failsLowercaseRule(passwordLetters) && !failsNumbersRule(
             passwordLetters) && !failsSpecialCharacterRule(passwordLetters);
+    }
+
+    private boolean passesUppercaseRule(ArrayList<String> passwordLetters) {
+        List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        return passwordLetters.stream().anyMatch(uppercaseAlphabet::contains);
     }
 
     private boolean passesLengthRule(ArrayList<String> passwordLetters) {
         return 8 <= passwordLetters.size();
-    }
-
-    private boolean failsUppercaseRule(List<String> passwordLetters) {
-        List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        return passwordLetters.stream().noneMatch(uppercaseAlphabet::contains);
     }
 
     private boolean failsLowercaseRule(List<String> passwordLetters) {
