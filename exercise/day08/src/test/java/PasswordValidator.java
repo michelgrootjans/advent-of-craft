@@ -7,7 +7,7 @@ public class PasswordValidator {
 
     public PasswordValidator() {
         rules = List.of(
-            new LengthRule(),
+            new LengthRule(8),
             new UppercaseRule(),
             new LowercaseRule(),
             new NumberRule(),
