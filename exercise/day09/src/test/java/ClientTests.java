@@ -19,6 +19,7 @@ class ClientTests {
         String statement = client.toStatement();
 
         assertThat(client.getTotalAmount()).isEqualTo(130.97);
+        assertThat(client.getTotalAmount()).isEqualTo(45.99 + 30.50 + 30.50 + 23.98);
         assertThat(statement).isEqualTo(
                 "Tenet Deluxe Edition for 45.99€" + lineSeparator() +
                         "Inception for 30.5€" + lineSeparator() +

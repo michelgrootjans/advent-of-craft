@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 class AtLeastOneOfThese implements PasswordRule {
@@ -9,7 +8,7 @@ class AtLeastOneOfThese implements PasswordRule {
     }
 
     @Override
-    public boolean passes(ArrayList<String> passwordLetters) {
+    public boolean passes(List<String> passwordLetters) {
         return passwordLetters.stream().anyMatch(allowedCharacters::contains);
     }
 }

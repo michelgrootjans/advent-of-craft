@@ -1,5 +1,5 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public interface PasswordRule {
-    boolean passes(ArrayList<String> passwordLetters);
+    boolean passes(List<String> passwordLetters);
 }
