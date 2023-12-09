@@ -4,36 +4,36 @@ import java.util.List;
 
 public class PasswordValidator {
     boolean validate(String password) {
-        if (password.length() < 8) return false;
-        if(failsUppercaseRule(password)) return false;
-        if(failsLowercaseRule(password)) return false;
-        if(failsNumbersRule(password)) return false;
-        if(failsSpecialCharacterRule(password)) return false;
+        ArrayList<String> passwordLetters = toLetters(password);
+
+        if (failsLengthRule(passwordLetters) || failsUppercaseRule(passwordLetters) || failsLowercaseRule(passwordLetters) || failsNumbersRule(
+            passwordLetters) || failsSpecialCharacterRule(passwordLetters)) {
+            return false;
+        }
 
         return true;
     }
 
+    private boolean failsLengthRule(ArrayList<String> passwordLetters) {
+        return passwordLetters.size() < 8;
+    }
 
-    private boolean failsUppercaseRule(String password) {
-        List<String> passwordLetters = toLetters(password);
+    private boolean failsUppercaseRule(List<String> passwordLetters) {
         List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         return passwordLetters.stream().noneMatch(uppercaseAlphabet::contains);
     }
 
-    private boolean failsLowercaseRule(String password) {
-        List<String> passwordLetters = toLetters(password);
+    private boolean failsLowercaseRule(List<String> passwordLetters) {
         List<String> lowercaseAlphabet = toLetters("abcdefghijklmnopqrstuvwxyz");
         return passwordLetters.stream().noneMatch(lowercaseAlphabet::contains);
     }
 
-    private boolean failsNumbersRule(String password) {
-        List<String> passwordLetters = toLetters(password);
+    private boolean failsNumbersRule(List<String> passwordLetters) {
         List<String> allowedNumbers = toLetters("0123456789");
         return passwordLetters.stream().noneMatch(allowedNumbers::contains);
     }
 
-    private boolean failsSpecialCharacterRule(String password) {
-        List<String> passwordLetters = toLetters(password);
+    private boolean failsSpecialCharacterRule(List<String> passwordLetters) {
         List<String> specialCharacters = toLetters(".*#@$%&");
         return passwordLetters.stream().noneMatch(specialCharacters::contains);
     }
