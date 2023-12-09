@@ -7,7 +7,12 @@ public class PasswordValidator {
         ArrayList<String> passwordLetters = toLetters(password);
 
         return passesLengthRule(passwordLetters) && passesUppercaseRule(passwordLetters) && passesLowercaseRule(passwordLetters) && passesNumberRule(passwordLetters)
-            && !failsSpecialCharacterRule(passwordLetters);
+            && passesSpecialCharacterRule(passwordLetters);
+    }
+
+    private boolean passesSpecialCharacterRule(ArrayList<String> passwordLetters) {
+        List<String> specialCharacters = toLetters(".*#@$%&");
+        return passwordLetters.stream().anyMatch(specialCharacters::contains);
     }
 
     private boolean passesNumberRule(ArrayList<String> passwordLetters) {
@@ -32,11 +37,6 @@ public class PasswordValidator {
     private boolean failsNumbersRule(List<String> passwordLetters) {
         List<String> allowedNumbers = toLetters("0123456789");
         return passwordLetters.stream().noneMatch(allowedNumbers::contains);
-    }
-
-    private boolean failsSpecialCharacterRule(List<String> passwordLetters) {
-        List<String> specialCharacters = toLetters(".*#@$%&");
-        return passwordLetters.stream().noneMatch(specialCharacters::contains);
     }
 
     private ArrayList<String> toLetters(String password) {
