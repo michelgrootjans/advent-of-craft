@@ -1,25 +1,25 @@
 import account.Client;
+import account.OrderLine;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 
 import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ClientTests {
-    private final Client client = new Client(new LinkedHashMap<>() {{
-        put("Tenet Deluxe Edition", 45.99);
-        put("Inception", 30.50);
-        put("The Dark Knight", 30.50);
-        put("Interstellar", 23.98);
-    }});
 
     @Test
     void client_should_return_statement() {
-        String statement = client.toStatement();
+        var client = new Client(List.of(
+            new OrderLine("Tenet Deluxe Edition", 45.99),
+            new OrderLine("Inception", 30.50),
+            new OrderLine("The Dark Knight", 30.50),
+            new OrderLine("Interstellar", 23.98))
+        );
 
         assertThat(client.getTotalAmount()).isEqualTo(45.99 + 30.50 + 30.50 + 23.98);
-        assertThat(statement).isEqualTo(
+        assertThat(client.toStatement()).isEqualTo(
                 "Tenet Deluxe Edition for 45.99€" + lineSeparator() +
                         "Inception for 30.5€" + lineSeparator() +
                         "The Dark Knight for 30.5€" + lineSeparator() +
