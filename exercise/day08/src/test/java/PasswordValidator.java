@@ -8,7 +8,8 @@ public class PasswordValidator {
     public PasswordValidator() {
         rules = List.of(
             new LengthRule(),
-            new UppercaseRule()
+            new UppercaseRule(),
+            new LowercaseRule()
         );
     }
 
@@ -16,7 +17,6 @@ public class PasswordValidator {
         ArrayList<String> passwordLetters = StringSplitter.toLetters(password);
 
         return rules.stream().allMatch(rule -> rule.passes(passwordLetters))
-            && passesLowercaseRule(passwordLetters)
             && passesNumberRule(passwordLetters)
             && passesSpecialCharacterRule(passwordLetters);
     }
@@ -29,16 +29,6 @@ public class PasswordValidator {
     private boolean passesNumberRule(ArrayList<String> passwordLetters) {
         return !failsNumbersRule(
             passwordLetters);
-    }
-
-    private boolean passesLowercaseRule(ArrayList<String> passwordLetters) {
-        List<String> lowercaseAlphabet = StringSplitter.toLetters("abcdefghijklmnopqrstuvwxyz");
-        return passwordLetters.stream().anyMatch(lowercaseAlphabet::contains);
-    }
-
-    private boolean passesUppercaseRule(ArrayList<String> passwordLetters) {
-        List<String> uppercaseAlphabet = StringSplitter.toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        return passwordLetters.stream().anyMatch(uppercaseAlphabet::contains);
     }
 
     private boolean failsNumbersRule(List<String> passwordLetters) {
