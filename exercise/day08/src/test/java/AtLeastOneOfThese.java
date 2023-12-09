@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtLeastOneOfThese implements PasswordRule {
+class AtLeastOneOfThese implements PasswordRule {
     private final List<String> allowedCharacters;
 
-    public AtLeastOneOfThese(ArrayList<String> allowedLetters) {
-        allowedCharacters = allowedLetters;
+    public AtLeastOneOfThese(String allowedLetters) {
+        allowedCharacters = StringSplitter.split(allowedLetters);
     }
 
     @Override

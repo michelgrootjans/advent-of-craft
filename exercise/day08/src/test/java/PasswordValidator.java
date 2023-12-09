@@ -9,19 +9,15 @@ public class PasswordValidator {
     public PasswordValidator() {
         rules = List.of(
             new AtLeastThisLong(8),
-            new AtLeastOneOfThese(split("ABCDEFGHIJKLMNOPQRSTUVWXYZ")),
-            new AtLeastOneOfThese(split("abcdefghijklmnopqrstuvwxyz")),
-            new AtLeastOneOfThese(split("0123456789")),
-            new AtLeastOneOfThese(split(".*#@$%&"))
+            new AtLeastOneOfThese("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+            new AtLeastOneOfThese("abcdefghijklmnopqrstuvwxyz"),
+            new AtLeastOneOfThese("0123456789"),
+            new AtLeastOneOfThese(".*#@$%&")
         );
     }
 
     boolean validate(String password) {
-        ArrayList<String> passwordLetters = split(password);
+        ArrayList<String> passwordLetters = StringSplitter.split(password);
         return rules.stream().allMatch(rule -> rule.passes(passwordLetters));
-    }
-
-    private ArrayList<String> split(String letters) {
-        return new ArrayList<>(Arrays.asList(letters.split("")));
     }
 }
