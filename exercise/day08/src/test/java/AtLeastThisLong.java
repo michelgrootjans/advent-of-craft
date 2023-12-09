@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class AtLeastThisLong implements PasswordRule {
-    private int min_password_length;
+    private final int min_password_length;
 
     public AtLeastThisLong(int min_password_length) {
         this.min_password_length = min_password_length;
