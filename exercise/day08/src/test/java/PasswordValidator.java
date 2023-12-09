@@ -6,12 +6,8 @@ public class PasswordValidator {
     boolean validate(String password) {
         ArrayList<String> passwordLetters = toLetters(password);
 
-        if (failsLengthRule(passwordLetters) || failsUppercaseRule(passwordLetters) || failsLowercaseRule(passwordLetters) || failsNumbersRule(
-            passwordLetters) || failsSpecialCharacterRule(passwordLetters)) {
-            return false;
-        }
-
-        return true;
+        return !failsLengthRule(passwordLetters) && !failsUppercaseRule(passwordLetters) && !failsLowercaseRule(passwordLetters) && !failsNumbersRule(
+            passwordLetters) && !failsSpecialCharacterRule(passwordLetters);
     }
 
     private boolean failsLengthRule(ArrayList<String> passwordLetters) {
