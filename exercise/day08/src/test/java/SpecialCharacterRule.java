@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpecialCharacterRule implements PasswordRule {
+    private static final List<String> validCharacters = StringSplitter.toLetters(".*#@$%&");
+
     @Override
     public boolean passes(ArrayList<String> passwordLetters) {
-        List<String> specialCharacters = StringSplitter.toLetters(".*#@$%&");
-        return passwordLetters.stream().anyMatch(specialCharacters::contains);
+        return passwordLetters.stream().anyMatch(validCharacters::contains);
     }
 }
