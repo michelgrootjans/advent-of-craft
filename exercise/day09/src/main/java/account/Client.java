@@ -1,19 +1,12 @@
 package account;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Client {
     private final List<OrderLine> lines;
 
-    public Client(Map<String, Double> orderLines) {
-        this(orderLines.entrySet().stream()
-            .map(set -> new OrderLine(set.getKey(), set.getValue()))
-            .toList());
-    }
-
-     public Client(List<OrderLine> list) {
+    public Client(List<OrderLine> list) {
         this.lines = list;
     }
 
