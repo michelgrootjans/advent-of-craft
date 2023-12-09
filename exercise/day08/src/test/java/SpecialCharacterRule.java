@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialCharacterRule implements PasswordRule {
+class SpecialCharacterRule implements PasswordRule {
     private static final List<String> validCharacters = StringSplitter.toLetters(".*#@$%&");
 
     @Override
