@@ -6,7 +6,10 @@ public class PasswordValidator {
     boolean validate(String password) {
         ArrayList<String> passwordLetters = toLetters(password);
 
-        return passesLengthRule(passwordLetters) && passesUppercaseRule(passwordLetters) && passesLowercaseRule(passwordLetters) && passesNumberRule(passwordLetters)
+        return passesLengthRule(passwordLetters)
+            && passesUppercaseRule(passwordLetters)
+            && passesLowercaseRule(passwordLetters)
+            && passesNumberRule(passwordLetters)
             && passesSpecialCharacterRule(passwordLetters);
     }
 
