@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PasswordValidator {
@@ -7,16 +8,20 @@ public class PasswordValidator {
 
     public PasswordValidator() {
         rules = List.of(
-            new LengthRule(8),
-            new UppercaseRule(StringSplitter.toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ")),
-            new LowercaseRule(),
-            new NumberRule(),
-            new SpecialCharacterRule()
+            new AtLeastThisLong(8),
+            new AtLeastOneOfThese(split("ABCDEFGHIJKLMNOPQRSTUVWXYZ")),
+            new AtLeastOneOfThese(split("abcdefghijklmnopqrstuvwxyz")),
+            new AtLeastOneOfThese(split("0123456789")),
+            new AtLeastOneOfThese(split(".*#@$%&"))
         );
     }
 
     boolean validate(String password) {
-        ArrayList<String> passwordLetters = StringSplitter.toLetters(password);
+        ArrayList<String> passwordLetters = split(password);
         return rules.stream().allMatch(rule -> rule.passes(passwordLetters));
+    }
+
+    private ArrayList<String> split(String letters) {
+        return new ArrayList<>(Arrays.asList(letters.split("")));
     }
 }

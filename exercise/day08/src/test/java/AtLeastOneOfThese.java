@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class UppercaseRule implements PasswordRule {
+public class AtLeastOneOfThese implements PasswordRule {
     private final List<String> allowedCharacters;
 
-    public UppercaseRule(ArrayList<String> allowedLetters) {
+    public AtLeastOneOfThese(ArrayList<String> allowedLetters) {
         allowedCharacters = allowedLetters;
     }
 
