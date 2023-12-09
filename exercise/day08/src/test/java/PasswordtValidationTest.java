@@ -22,11 +22,23 @@ class PasswordtValidationTest {
         assertThat(isValid("abcdef1*")).isFalse();
     }
 
+    @Test
+    void no_lowercase() {
+        assertThat(isValid("ABCDEF1*")).isFalse();
+    }
+
     private boolean isValid(String password) {
         if (password.length() < 8) return false;
         if(failsUppercaseRule(password)) return false;
+        if(failsLowercaseRule(password)) return false;
 
         return true;
+    }
+
+    private boolean failsLowercaseRule(String password) {
+        List<String> passwordLetters = toLetters(password);
+        List<String> lowercaseAlphabet = toLetters("abcdefghijklmnopqrstuvwxyz");
+        return passwordLetters.stream().noneMatch(lowercaseAlphabet::contains);
     }
 
     private boolean failsUppercaseRule(String password) {
