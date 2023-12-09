@@ -46,6 +46,7 @@ Here are the different challenges :
 - [Day 5: No "for" loop authorized.](exercise/day05/docs/challenge.md)
 - [Day 6: Parameterize your tests.](exercise/day06/docs/challenge.md)
 - [Day 7: Simplify the run method by extracting the right behavior.](exercise/day07/docs/challenge.md)
+- [Day 8: Using TDD rules, write a password validation program.](exercise/day08/docs/challenge.md)
 
 ### Solutions
 A solution proposal will be published here every day during the `Advent Of Craft` containing `the code` and a `step by step` guide.
@@ -56,3 +57,5 @@ A solution proposal will be published here every day during the `Advent Of Craft
 - [Day 4: Identify the behavior under test and rewrite the tests.](solution/day04/docs/step-by-step.md)
 - [Day 5: No "for" loop authorized.](solution/day05/docs/step-by-step.md)
 - [Day 6: Parameterize your tests.](solution/day06/docs/step-by-step.md)
+- [Day 7: Simplify the run method by extracting the right behavior.](solution/day07/docs/step-by-step.md)
+- [Day 8: Using TDD rules, write a password validation program.](solution/day08/docs/step-by-step.md)
