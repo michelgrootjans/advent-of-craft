@@ -24,7 +24,7 @@ public class Client {
     }
 
     private String formatLine(OrderLine entry) {
-        return entry.description() + " for " + entry.cost() + "€";
+        return "%s for %s€".formatted(entry.description(), entry.cost());
     }
 
 }
