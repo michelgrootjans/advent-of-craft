@@ -8,7 +8,14 @@ class PasswordtValidationTest {
         assertThat(isValid("ABCdef1*")).isTrue();
     }
 
+    @Test
+    void less_than_8_characters() {
+        assertThat(isValid("ABCde1*")).isFalse();
+    }
+
     private boolean isValid(String password) {
+        if (password.length() < 8) return false;
+
         return true;
     }
 }
