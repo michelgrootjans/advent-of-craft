@@ -3,10 +3,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PasswordValidator {
+
+    private LengthRule lengthRule;
+
+    public PasswordValidator() {
+        lengthRule = new LengthRule();
+    }
+
     boolean validate(String password) {
         ArrayList<String> passwordLetters = toLetters(password);
 
-        return passesLengthRule(passwordLetters)
+        return lengthRule.passes(passwordLetters)
             && passesUppercaseRule(passwordLetters)
             && passesLowercaseRule(passwordLetters)
             && passesNumberRule(passwordLetters)
@@ -31,10 +38,6 @@ public class PasswordValidator {
     private boolean passesUppercaseRule(ArrayList<String> passwordLetters) {
         List<String> uppercaseAlphabet = toLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         return passwordLetters.stream().anyMatch(uppercaseAlphabet::contains);
-    }
-
-    private boolean passesLengthRule(ArrayList<String> passwordLetters) {
-        return 8 <= passwordLetters.size();
     }
 
     private boolean failsNumbersRule(List<String> passwordLetters) {
