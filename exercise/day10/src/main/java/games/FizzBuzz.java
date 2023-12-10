@@ -6,15 +6,12 @@ import java.util.function.Supplier;
 public class FizzBuzz {
     public static final int MIN = 0;
     public static final int MAX = 100;
-    public static final int FIZZ = 3;
-    public static final int BUZZ = 5;
-    public static final int FIZZBUZZ = 15;
 
     private static final List<Foo> conditions = List.of(
         new RangeRule(MIN, MAX),
-        new Converter(FIZZBUZZ, () -> "FizzBuzz"),
-        new Converter(FIZZ, () -> "Fizz"),
-        new Converter(BUZZ, () -> "Buzz")
+        new IfDivisibleBy(15, () -> "FizzBuzz"),
+        new IfDivisibleBy(3, () -> "Fizz"),
+        new IfDivisibleBy(5, () -> "Buzz")
     );
 
     private FizzBuzz() {
@@ -27,28 +24,24 @@ public class FizzBuzz {
             .map(Foo::bar).orElse(input.toString());
     }
 
-    private static boolean is(Integer divisor, Integer input) {
-        return input % divisor == 0;
-    }
-
     private interface Foo {
         boolean matches(Integer input);
 
         String bar();
     }
 
-    private static class Converter implements Foo {
+    private static class IfDivisibleBy implements Foo {
         private final int divisor;
         private final Supplier<String> result;
 
-        public Converter(int divisor, Supplier<String> result) {
+        public IfDivisibleBy(int divisor, Supplier<String> result) {
             this.divisor = divisor;
             this.result = result;
         }
 
         @Override
         public boolean matches(Integer input) {
-            return is(divisor, input);
+            return input % divisor == 0;
         }
 
         @Override
