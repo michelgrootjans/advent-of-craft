@@ -11,7 +11,7 @@ public class FizzBuzz {
     public static final int FIZZBUZZ = 15;
 
     private static final List<Foo> conditions = List.of(
-        new RangeRule(),
+        new RangeRule(MIN, MAX),
         new Converter(FIZZBUZZ, () -> "FizzBuzz"),
         new Converter(FIZZ, () -> "Fizz"),
         new Converter(BUZZ, () -> "Buzz")
@@ -82,6 +82,15 @@ public class FizzBuzz {
     }
 
     private static class RangeRule implements Foo {
+
+        private int min;
+        private int max;
+
+        public RangeRule(int min, int max) {
+            this.min = min;
+            this.max = max;
+        }
+
         @Override
         public boolean matches(Integer input) {
             return isOutOfRange(input);
@@ -92,8 +101,8 @@ public class FizzBuzz {
             throw new OutOfRangeException();
         }
 
-        private static boolean isOutOfRange(Integer input) {
-            return input <= MIN || MAX < input;
+        private boolean isOutOfRange(Integer input) {
+            return input <= min || max < input;
         }
     }
 }
