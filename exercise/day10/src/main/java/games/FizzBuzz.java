@@ -1,6 +1,5 @@
 package games;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FizzBuzz {
@@ -30,11 +29,14 @@ public class FizzBuzz {
         if (is(BUZZ, input)) {
             return "Buzz";
         }
-        List<Foo> conditions = new ArrayList<>();
+
+        List<Foo> conditions = List.of(
+        );
+
         return conditions.stream()
             .filter(foo -> foo.matches(input))
             .findFirst()
-            .map(foo -> foo.bar()).orElse(input.toString());
+            .map(Foo::bar).orElse(input.toString());
     }
 
     private static boolean is(Integer divisor, Integer input) {
@@ -45,13 +47,9 @@ public class FizzBuzz {
         return input <= MIN || input > MAX;
     }
 
-    private static class Foo {
-        public boolean matches(Integer input) {
-            return false;
-        }
+    private interface Foo {
+        boolean matches(Integer input);
 
-        public String bar() {
-            return "nope";
-        }
+        String bar();
     }
 }
