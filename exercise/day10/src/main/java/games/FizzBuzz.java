@@ -1,5 +1,8 @@
 package games;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FizzBuzz {
     public static final int MIN = 0;
     public static final int MAX = 100;
@@ -10,7 +13,7 @@ public class FizzBuzz {
     private FizzBuzz() {
     }
 
-    public static String convert(Integer input) throws OutOfRangeException {
+    public static String convert(Integer input) {
         if (isOutOfRange(input)) {
             throw new OutOfRangeException();
         }
@@ -27,6 +30,11 @@ public class FizzBuzz {
         if (is(BUZZ, input)) {
             return "Buzz";
         }
+        List<Foo> conditions = new ArrayList<>();
+        conditions.stream()
+            .filter(foo -> foo.matches(input))
+            .findFirst()
+            .map(foo -> foo.bar()).orElse(input.toString());
         return input.toString();
     }
 
@@ -36,5 +44,15 @@ public class FizzBuzz {
 
     private static boolean isOutOfRange(Integer input) {
         return input <= MIN || input > MAX;
+    }
+
+    private static class Foo {
+        public boolean matches(Integer input) {
+            return false;
+        }
+
+        public String bar() {
+            return "nope";
+        }
     }
 }

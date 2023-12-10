@@ -37,7 +37,7 @@ class FizzBuzzTests {
 
     @ParameterizedTest
     @MethodSource("validInputs")
-    void returns_number_representation(int input, String expectedResult) throws OutOfRangeException {
+    void returns_number_representation(int input, String expectedResult) {
         assertThat(FizzBuzz.convert(input))
                 .isEqualTo(expectedResult);
     }
