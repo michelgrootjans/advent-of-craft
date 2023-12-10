@@ -1,6 +1,7 @@
 package games;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class FizzBuzz {
     public static final int MIN = 0;
@@ -9,11 +10,11 @@ public class FizzBuzz {
     public static final int BUZZ = 5;
     public static final int FIZZBUZZ = 15;
 
-    private static List<Foo> conditions = List.of(
+    private static final List<Foo> conditions = List.of(
         new RangeRule(),
         new FizzBuzzRule(),
         new FizzRule(),
-        new BuzzRule()
+        new Converter(BUZZ, () -> "Buzz")
     );
 
     private FizzBuzz() {
@@ -30,26 +31,30 @@ public class FizzBuzz {
         return input % divisor == 0;
     }
 
-    private static boolean isOutOfRange(Integer input) {
-        return input <= MIN || input > MAX;
-    }
-
     private interface Foo {
         boolean matches(Integer input);
 
         String bar();
     }
 
-    private static class BuzzRule implements Foo {
+    private static class Converter implements Foo {
+        private final int divisor;
+        private final Supplier<String> result;
+
+        public Converter(int divisor, Supplier<String> result) {
+            this.divisor = divisor;
+            this.result = result;
+        }
+
         @Override
         public boolean matches(Integer input) {
-            return is(BUZZ, input);
+            return is(divisor, input);
         }
 
         @Override
         public String bar() {
-            return "Buzz";
-        }
+            return result.get();
+        };
     }
 
     private static class FizzRule implements Foo {
