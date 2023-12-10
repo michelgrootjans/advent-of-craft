@@ -54,37 +54,12 @@ public class FizzBuzz {
         @Override
         public String bar() {
             return result.get();
-        };
-    }
-
-    private static class FizzRule implements Foo {
-        @Override
-        public boolean matches(Integer input) {
-            return is(FIZZ, input);
-        }
-
-        @Override
-        public String bar() {
-            return "Fizz";
-        }
-    }
-
-    private static class FizzBuzzRule implements Foo {
-        @Override
-        public boolean matches(Integer input) {
-            return is(FIZZBUZZ, input);
-        }
-
-        @Override
-        public String bar() {
-            return "FizzBuzz";
         }
     }
 
     private static class RangeRule implements Foo {
-
-        private int min;
-        private int max;
+        private final int min;
+        private final int max;
 
         public RangeRule(int min, int max) {
             this.min = min;
