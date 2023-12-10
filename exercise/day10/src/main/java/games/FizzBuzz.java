@@ -20,11 +20,8 @@ public class FizzBuzz {
     }
 
     private static String convertSafely(Integer input) {
-        if (is(FIZZBUZZ, input)) {
-            return "FizzBuzz";
-        }
-
         List<Foo> conditions = List.of(
+            new FizzBuzzRule(),
             new FizzRule(),
             new BuzzRule()
         );
@@ -70,6 +67,18 @@ public class FizzBuzz {
         @Override
         public String bar() {
             return "Fizz";
+        }
+    }
+
+    private static class FizzBuzzRule implements Foo {
+        @Override
+        public boolean matches(Integer input) {
+            return input % 15 == 0;
+        }
+
+        @Override
+        public String bar() {
+            return "FizzBuzz";
         }
     }
 }
