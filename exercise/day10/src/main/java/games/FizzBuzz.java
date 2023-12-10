@@ -13,10 +13,8 @@ public class FizzBuzz {
     }
 
     public static String convert(Integer input) {
-        if (isOutOfRange(input)) {
-            throw new OutOfRangeException();
-        }
         List<Foo> conditions = List.of(
+            new RangeRule(),
             new FizzBuzzRule(),
             new FizzRule(),
             new BuzzRule()
@@ -75,6 +73,22 @@ public class FizzBuzz {
         @Override
         public String bar() {
             return "FizzBuzz";
+        }
+    }
+
+    private static class RangeRule implements Foo {
+        @Override
+        public boolean matches(Integer input) {
+            return isOutOfRange(input);
+        }
+
+        @Override
+        public String bar() {
+            throw new OutOfRangeException();
+        }
+
+        private static boolean isOutOfRange(Integer input) {
+            return input <= MIN || MAX < input;
         }
     }
 }
