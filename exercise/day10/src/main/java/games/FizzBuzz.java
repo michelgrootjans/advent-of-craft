@@ -31,11 +31,10 @@ public class FizzBuzz {
             return "Buzz";
         }
         List<Foo> conditions = new ArrayList<>();
-        conditions.stream()
+        return conditions.stream()
             .filter(foo -> foo.matches(input))
             .findFirst()
             .map(foo -> foo.bar()).orElse(input.toString());
-        return input.toString();
     }
 
     private static boolean is(Integer divisor, Integer input) {
