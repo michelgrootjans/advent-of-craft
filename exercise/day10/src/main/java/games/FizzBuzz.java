@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class FizzBuzz {
-    public static final int MIN = 0;
-    public static final int MAX = 100;
 
-    private static final List<FizzBuzzRule> conditions = List.of(
-        new RangeRule(MIN, MAX),
+    private static final List<FizzBuzzRule> rules = List.of(
+        new MustBeBetween(0, 100),
         new IfDivisibleBy(15, () -> "FizzBuzz"),
         new IfDivisibleBy(3, () -> "Fizz"),
         new IfDivisibleBy(5, () -> "Buzz")
@@ -18,7 +16,7 @@ public class FizzBuzz {
     }
 
     public static String convert(Integer input) {
-        return conditions.stream()
+        return rules.stream()
             .filter(rule -> rule.matches(input))
             .findFirst()
             .map(FizzBuzzRule::execute)
@@ -51,11 +49,11 @@ public class FizzBuzz {
         }
     }
 
-    private static class RangeRule implements FizzBuzzRule {
+    private static class MustBeBetween implements FizzBuzzRule {
         private final int min;
         private final int max;
 
-        public RangeRule(int min, int max) {
+        public MustBeBetween(int min, int max) {
             this.min = min;
             this.max = max;
         }
