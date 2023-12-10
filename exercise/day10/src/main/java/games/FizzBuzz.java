@@ -1,6 +1,7 @@
 package games;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class FizzBuzz {
@@ -9,8 +10,12 @@ public class FizzBuzz {
         new MustBeBetween(0, 100),
         new IfDivisibleBy(15, () -> "FizzBuzz"),
         new IfDivisibleBy(3, () -> "Fizz"),
-        new IfDivisibleBy(5, () -> "Buzz")
+        new When(divisibleBy(5), () -> "Buzz")
     );
+
+    private static Predicate<Integer> divisibleBy(int divider) {
+        return blah -> blah % divider == 0;
+    }
 
     private FizzBuzz() {
     }
@@ -70,6 +75,26 @@ public class FizzBuzz {
 
         private boolean isOutOfRange(Integer input) {
             return input <= min || max < input;
+        }
+    }
+
+    private static class When implements FizzBuzzRule{
+        private final Predicate<Integer> predicate;
+        private final Supplier<String> result;
+
+        public When(Predicate<Integer> predicate, Supplier<String> result) {
+            this.predicate = predicate;
+            this.result = result;
+        }
+
+        @Override
+        public boolean matches(Integer input) {
+            return predicate.test(input);
+        }
+
+        @Override
+        public String execute() {
+            return result.get();
         }
     }
 }
