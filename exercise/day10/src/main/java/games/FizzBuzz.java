@@ -13,7 +13,7 @@ public class FizzBuzz {
     private static final List<Foo> conditions = List.of(
         new RangeRule(),
         new FizzBuzzRule(),
-        new FizzRule(),
+        new Converter(FIZZ, () -> "Fizz"),
         new Converter(BUZZ, () -> "Buzz")
     );
 
