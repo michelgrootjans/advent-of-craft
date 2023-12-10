@@ -26,11 +26,9 @@ public class FizzBuzz {
         if (is(FIZZ, input)) {
             return "Fizz";
         }
-        if (is(BUZZ, input)) {
-            return "Buzz";
-        }
 
         List<Foo> conditions = List.of(
+            new BuzzRule()
         );
 
         return conditions.stream()
@@ -51,5 +49,17 @@ public class FizzBuzz {
         boolean matches(Integer input);
 
         String bar();
+    }
+
+    private static class BuzzRule implements Foo {
+        @Override
+        public boolean matches(Integer input) {
+            return input % 5 == 0;
+        }
+
+        @Override
+        public String bar() {
+            return "Buzz";
+        }
     }
 }
