@@ -16,10 +16,6 @@ public class FizzBuzz {
         if (isOutOfRange(input)) {
             throw new OutOfRangeException();
         }
-        return convertSafely(input);
-    }
-
-    private static String convertSafely(Integer input) {
         List<Foo> conditions = List.of(
             new FizzBuzzRule(),
             new FizzRule(),
