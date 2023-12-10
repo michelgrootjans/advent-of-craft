@@ -8,17 +8,17 @@ public class FizzBuzz {
     public static final int FIZZ = 3;
     public static final int BUZZ = 5;
     public static final int FIZZBUZZ = 15;
+    private static List<Foo> conditions = List.of(
+        new RangeRule(),
+        new FizzBuzzRule(),
+        new FizzRule(),
+        new BuzzRule()
+    );
 
     private FizzBuzz() {
     }
 
     public static String convert(Integer input) {
-        List<Foo> conditions = List.of(
-            new RangeRule(),
-            new FizzBuzzRule(),
-            new FizzRule(),
-            new BuzzRule()
-        );
 
         return conditions.stream()
             .filter(foo -> foo.matches(input))
@@ -43,7 +43,7 @@ public class FizzBuzz {
     private static class BuzzRule implements Foo {
         @Override
         public boolean matches(Integer input) {
-            return input % 5 == 0;
+            return input % BUZZ == 0;
         }
 
         @Override
@@ -55,7 +55,7 @@ public class FizzBuzz {
     private static class FizzRule implements Foo {
         @Override
         public boolean matches(Integer input) {
-            return input % 3 == 0;
+            return input % FIZZ == 0;
         }
 
         @Override
@@ -67,7 +67,7 @@ public class FizzBuzz {
     private static class FizzBuzzRule implements Foo {
         @Override
         public boolean matches(Integer input) {
-            return input % 15 == 0;
+            return input % FIZZBUZZ == 0;
         }
 
         @Override
