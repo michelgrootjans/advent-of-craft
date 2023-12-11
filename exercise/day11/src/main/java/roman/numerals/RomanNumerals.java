@@ -54,6 +54,6 @@ public final class RomanNumerals {
     }
 
     private static boolean isInRange(int number) {
-        return number > 0 && number <= MAX_NUMBER;
+        return 0 < number && number <= MAX_NUMBER;
     }
 }
