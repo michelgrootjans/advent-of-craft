@@ -49,6 +49,7 @@ Here are the different challenges :
 - [Day 8: Using TDD rules, write a password validation program.](exercise/day08/docs/challenge.md)
 - [Day 9: Fix the code.](exercise/day09/docs/challenge.md)
 - [Day 10: Dot not use "if" statement.](exercise/day10/docs/challenge.md)
+- [Day 11: Gather a dependency freshness metric.](exercise/day11/docs/challenge.md)
 
 ### Solutions
 A solution proposal will be published here every day during the `Advent Of Craft` containing `the code` and a `step by step` guide.
@@ -62,3 +63,4 @@ A solution proposal will be published here every day during the `Advent Of Craft
 - [Day 7: Simplify the run method by extracting the right behavior.](solution/day07/docs/step-by-step.md)
 - [Day 8: Using TDD rules, write a password validation program.](solution/day08/docs/step-by-step.md)
 - [Day 9: Fix the code.](solution/day09/docs/step-by-step.md)
+- [Day 10: Dot not use "if" statement.](solution/day10/docs/step-by-step.md)
