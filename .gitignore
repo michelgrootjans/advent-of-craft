@@ -37,3 +37,5 @@ target/
 ### Approval
 *.received.*
 
+### versions
+pom.xml.versionsBackup
