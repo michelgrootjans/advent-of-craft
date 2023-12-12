@@ -8,7 +8,7 @@ class AtLeastOneOfThese implements PasswordRule {
     }
 
     @Override
-    public boolean passes(List<String> passwordLetters) {
-        return passwordLetters.stream().anyMatch(allowedCharacters::contains);
+    public boolean passes(String password) {
+        return StringSplitter.split(password).stream().anyMatch(allowedCharacters::contains);
     }
 }

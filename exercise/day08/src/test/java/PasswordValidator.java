@@ -10,12 +10,12 @@ public class PasswordValidator {
             new AtLeastOneOfThese("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
             new AtLeastOneOfThese("abcdefghijklmnopqrstuvwxyz"),
             new AtLeastOneOfThese("0123456789"),
-            new AtLeastOneOfThese(".*#@$%&")
+            new AtLeastOneOfThese2(".*#@$%&")
         );
     }
 
     boolean validate(String password) {
         List<String> passwordLetters = StringSplitter.split(password);
-        return rules.stream().allMatch(rule -> rule.passes(passwordLetters));
+        return rules.stream().allMatch(rule -> rule.passes(password));
     }
 }

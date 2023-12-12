@@ -1,5 +1,3 @@
-import java.util.List;
-
 class AtLeastThisLong implements PasswordRule {
     private final int min_password_length;
 
@@ -7,7 +5,7 @@ class AtLeastThisLong implements PasswordRule {
         this.min_password_length = min_password_length;
     }
 
-    public boolean passes(List<String> passwordLetters) {
-        return min_password_length <= passwordLetters.size();
+    public boolean passes(String password) {
+        return min_password_length <= password.length();
     }
 }
