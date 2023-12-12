@@ -12,13 +12,11 @@ public class Greeter {
     }
 
     private IGreeter findGreeter(String formality) {
-        if (formality.equals("formal")) {
-            return new FormalGreeter();
-        } else if (formality.equals("casual")) {
-            return new CasualGreeter();
-        } else if (formality.equals("intimate")) {
-            return new IntimateGreeter();
-        }
-        return new DefaultGreeter();
+        return switch (formality) {
+            case "formal" -> new FormalGreeter();
+            case "casual" -> new CasualGreeter();
+            case "intimate" -> new IntimateGreeter();
+            default -> new DefaultGreeter();
+        };
     }
 }
