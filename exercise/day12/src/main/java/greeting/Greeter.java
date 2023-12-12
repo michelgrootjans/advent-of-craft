@@ -13,7 +13,7 @@ public class Greeter {
         } else if (this.formality.equals("casual")) {
             return "Sup bro?";
         } else if (this.formality.equals("intimate")) {
-            return new IntimateGreeter().greet() + "Hello Darling!";
+            return new IntimateGreeter().greet();
         } else {
             return new DefaultGreeter().greet();
         }
