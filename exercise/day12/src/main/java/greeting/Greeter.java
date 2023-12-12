@@ -1,7 +1,6 @@
 package greeting;
 
 public class Greeter {
-    String formality;
     private IGreeter greeter = new DefaultGreeter();
 
     public String greet() {
@@ -9,7 +8,6 @@ public class Greeter {
     }
 
     public void setFormality(String formality) {
-        this.formality = formality;
         this.greeter = findGreeter(formality);
     }
 
