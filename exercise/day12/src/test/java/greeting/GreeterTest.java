@@ -1,13 +1,13 @@
 package greeting;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 class GreeterTest {
     @Test
     void saysHello() {
-        Greeter greeter = new DefaultGreeter();
+        Greeter greeter = GreeterFactory.create("default");
 
         assertThat(greeter.greet())
                 .isEqualTo("Hello.");
@@ -15,7 +15,7 @@ class GreeterTest {
 
     @Test
     void saysHelloFormally() {
-        Greeter greeter = new FormalGreeter();
+        Greeter greeter = GreeterFactory.create("formal");
 
         assertThat(greeter.greet())
                 .isEqualTo("Good evening, sir.");
@@ -23,7 +23,7 @@ class GreeterTest {
 
     @Test
     void saysHelloCasually() {
-        Greeter greeter = new CasualGreeter();
+        Greeter greeter = GreeterFactory.create("casual");
 
         assertThat(greeter.greet())
                 .isEqualTo("Sup bro?");
@@ -31,7 +31,7 @@ class GreeterTest {
 
     @Test
     void saysHelloIntimately() {
-        Greeter greeter = new IntimateGreeter();
+        Greeter greeter = GreeterFactory.create("intimate");
 
         assertThat(greeter.greet())
                 .isEqualTo("Hello Darling!");
