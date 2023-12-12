@@ -35,9 +35,7 @@ class PasswordValidationTest {
 
     @Property
     void valid_special_character(@ForAll @Chars({'.', '*', '#', '@', '$', '%', '&'}) @NotBlank String special_character) {
-        String password = special_character.repeat(5) + "a" + "A" + "1";
-        System.out.println(password);
-        assertThat(validator.validate(password)).isTrue();
+        assertThat(validator.validate(special_character.repeat(5) + "a" + "A" + "1")).isTrue();
     }
 
     @Test
