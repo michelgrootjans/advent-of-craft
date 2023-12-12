@@ -1,14 +1,12 @@
-import java.util.List;
+public class AtLeastOneOfThese implements PasswordRule {
+    private final String pattern;
 
-class AtLeastOneOfThese implements PasswordRule {
-    private final List<String> allowedCharacters;
-
-    public AtLeastOneOfThese(String allowedLetters) {
-        allowedCharacters = StringSplitter.split(allowedLetters);
+    public AtLeastOneOfThese(String pattern) {
+        this.pattern = ".*[" + pattern + "].*";
     }
 
     @Override
     public boolean passes(String password) {
-        return StringSplitter.split(password).stream().anyMatch(allowedCharacters::contains);
+        return password.matches(pattern);
     }
 }
