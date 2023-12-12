@@ -15,7 +15,6 @@ public class PasswordValidator {
     }
 
     boolean validate(String password) {
-        List<String> passwordLetters = StringSplitter.split(password);
         return rules.stream().allMatch(rule -> rule.passes(password));
     }
 }
