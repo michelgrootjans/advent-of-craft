@@ -9,7 +9,7 @@ public class Greeter {
         }
 
         if (this.formality.equals("formal")) {
-            return new FormalGreeter().greet() + "Good evening, sir.";
+            return new FormalGreeter().greet();
         } else if (this.formality.equals("casual")) {
             return new CasualGreeter().greet();
         } else if (this.formality.equals("intimate")) {
