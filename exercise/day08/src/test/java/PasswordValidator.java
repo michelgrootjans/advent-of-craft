@@ -7,9 +7,9 @@ public class PasswordValidator {
     public PasswordValidator() {
         rules = List.of(
             new AtLeastThisLong(8),
-            new AtLeastOneOfThese("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
-            new AtLeastOneOfThese("abcdefghijklmnopqrstuvwxyz"),
-            new AtLeastOneOfThese("0123456789"),
+            new AtLeastOneOfThese2("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+            new AtLeastOneOfThese2("abcdefghijklmnopqrstuvwxyz"),
+            new AtLeastOneOfThese2("0123456789"),
             new AtLeastOneOfThese2(".*#@$%&")
         );
     }
