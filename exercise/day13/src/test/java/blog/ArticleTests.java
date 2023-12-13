@@ -23,8 +23,6 @@ class ArticleTests {
     void should_add_comment_in_an_article() throws CommentAlreadyExistException {
         article.addComment("comment 1", "author 1", now);
 
-        assertThat(article.getComments()).hasSize(1);
-
         assertThat(article.getComments()).containsExactly(
             new Comment("comment 1", "author 1", now)
         );
