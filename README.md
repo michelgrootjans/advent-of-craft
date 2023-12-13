@@ -34,7 +34,7 @@ To facilitate the communication around challenges you can join us on `Discord` b
 ![Discord Advent Of Craft](img/discord.png)
 
 ## Instructions
-[Here are the instructions for the journey](d-1_instructions_post.md)
+[Here are the instructions for the journey](INSTRUCTIONS.md)
 
 ## Challenges - 2023
 Here are the different challenges :
@@ -51,6 +51,7 @@ Here are the different challenges :
 - [Day 10: Dot not use "if" statement.](exercise/day10/docs/challenge.md)
 - [Day 11: Gather a dependency freshness metric.](exercise/day11/docs/challenge.md)
 - [Day 12: Make your code open for extension.](exercise/day12/docs/challenge.md)
+- [Day 13: Find a way to eliminate the irrelevant, and amplify the essentials of those tests.](exercise/day13/docs/challenge.md)
 
 ### Solutions
 A solution proposal will be published here every day during the `Advent Of Craft` containing `the code` and a `step by step` guide.
@@ -66,3 +67,4 @@ A solution proposal will be published here every day during the `Advent Of Craft
 - [Day 9: Fix the code.](solution/day09/docs/step-by-step.md)
 - [Day 10: Dot not use "if" statement.](solution/day10/docs/step-by-step.md)
 - [Day 11: Gather a dependency freshness metric.](solution/day11/docs/step-by-step.md)
+- [Day 12: Make your code open for extension.](solution/day12/docs/step-by-step.md)
