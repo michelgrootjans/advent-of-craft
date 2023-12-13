@@ -32,7 +32,6 @@ class ArticleTests {
 
     @Test
     void should_add_comment_in_an_article_containing_already_a_comment() throws CommentAlreadyExistException {
-
         article.addComment("comment 1", "author 1", now);
         article.addComment("comment 2", "commenter 2", now);
 
