@@ -35,6 +35,8 @@
         <junit.version>5.10.1</junit.version>
         <assertJ.version>3.24.2</assertJ.version>
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+        <vavr.version>0.10.4</vavr.version>
+        <vavr-test.version>0.4.3</vavr-test.version>
     </properties>
 
     <build>
@@ -88,6 +90,18 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertJ.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>${vavr.version}</version>
+        </dependency>
+        <!-- To facilitate assertions -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-vavr</artifactId>
+            <version>${vavr-test.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
