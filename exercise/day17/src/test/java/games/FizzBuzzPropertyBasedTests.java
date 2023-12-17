@@ -61,9 +61,7 @@ public class FizzBuzzPropertyBasedTests {
 
     @Provide
     Arbitrary<Integer> multiples_of_15() {
-        return Arbitraries
-            .integers()
-            .filter(multiple_of(15));
+        return integers(multiple_of(15));
     }
 
     private Arbitrary<Integer> integers(Predicate<Integer> predicate) {
