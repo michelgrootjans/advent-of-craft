@@ -41,9 +41,8 @@ class ArticleTests {
             var article = buildArticle()
                 .addComment("a comment", "Paul", now);
 
-            assertThatThrownBy(() -> {
-                article.addComment("a comment", "Paul", now);
-            }).isInstanceOf(CommentAlreadyExistException.class);
+            assertThatThrownBy(() -> article.addComment("a comment", "Paul", now))
+                .isInstanceOf(CommentAlreadyExistException.class);
         }
     }
 
