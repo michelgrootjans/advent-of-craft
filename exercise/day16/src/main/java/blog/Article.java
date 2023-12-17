@@ -1,37 +1,36 @@
 package blog;
 
+import static blog.ListHelper.append;
+import static java.util.Collections.emptyList;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Article {
     private final String name;
     private final String content;
-    private final ArrayList<Comment> comments;
+    private final List<Comment> comments;
 
     public Article(String name, String content) {
+        this(name, content, emptyList());
+    }
+
+    private Article(String name, String content, List<Comment> comments) {
         this.name = name;
         this.content = content;
-        this.comments = new ArrayList<>();
+        this.comments = comments;
     }
 
-    private void addComment(
-            String text,
-            String author,
-            LocalDate creationDate) throws CommentAlreadyExistException {
+    public Article addComment(String text, String author, LocalDate creationDate) throws CommentAlreadyExistException {
         var comment = new Comment(text, author, creationDate);
 
-        if (comments.contains(comment)) {
-            throw new CommentAlreadyExistException();
-        } else comments.add(comment);
+        if (comments.contains(comment)){ throw new CommentAlreadyExistException();}
+
+        return new Article(name, content, append(comments, comment));
     }
 
-    public void addComment(String text, String author) throws CommentAlreadyExistException {
-        addComment(text, author, LocalDate.now());
-    }
-
-    public List<Comment> getComments() {
-        return comments;
+    public List<Comment> comments() {
+        return comments.stream().toList();
     }
 }
 
