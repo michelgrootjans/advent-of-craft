@@ -37,6 +37,7 @@
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
         <vavr.version>0.10.4</vavr.version>
         <vavr-test.version>0.4.3</vavr-test.version>
+        <approvals.version>22.3.3</approvals.version>
     </properties>
 
     <build>
@@ -102,6 +103,12 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-vavr</artifactId>
             <version>${vavr-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.approvaltests</groupId>
+            <artifactId>approvaltests</artifactId>
+            <version>${approvals.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
