@@ -39,3 +39,6 @@ target/
 
 ### versions
 pom.xml.versionsBackup
+
+### jqwik
+.jqwik-database
